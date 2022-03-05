@@ -24,7 +24,6 @@ class RegistrationViewModel @Inject constructor(private val registrationReposito
     private var loginToken: String = ""
     private var refreshToken: String = ""
 
-
     fun postDataToRepository(name: String, phone: String, email: String, password: String) {
         registrationRepository.registration(
             RegistrationUserModel(
