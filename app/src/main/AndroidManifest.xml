@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Gallery2"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".features.mainActivity.MainActivity"
+            android:name=".features.mainactivity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Gallery2.Launcher">
             <intent-filter>

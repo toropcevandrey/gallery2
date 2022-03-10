@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.gallery2.App
 import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentRegistrationBinding
@@ -73,9 +73,8 @@ class RegistrationFragment : Fragment() {
 
 
             if (isSuccess) {
-                view?.findNavController()?.navigate(
-                    R.id.navigate_registration_to_mainFragment,
-                    null
+                findNavController().navigate(
+                    RegistrationFragmentDirections.navigateRegistrationToMainFragment()
                 )
             }
 

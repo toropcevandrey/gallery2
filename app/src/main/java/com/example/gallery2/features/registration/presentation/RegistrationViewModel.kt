@@ -1,31 +1,33 @@
 package com.example.gallery2.features.registration.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gallery2.api.models.RegistrationClientModel
 import com.example.gallery2.api.models.RegistrationUserModel
 import com.example.gallery2.features.registration.domain.RegistrationRepository
+import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_EMAIL
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_LOGIN_TOKEN
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_PASSWORD
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_REFRESH_TOKEN
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class RegistrationViewModel @Inject constructor(private val registrationRepository: RegistrationRepository) :
-    ViewModel() {
+class RegistrationViewModel @Inject constructor(
+    private val registrationRepository: RegistrationRepository,
+    private val sharedPreferenceRepository: SharedPreferenceRepository
+) : ViewModel() {
 
-    private val ALLOWED_GRANT_TYPES = listOf("refresh_token", "password")
-    val registrationLiveData: MutableLiveData<RegistrationState> =
-        MutableLiveData(RegistrationState.FirstInit)
     private val compositeDisposable = CompositeDisposable()
-
-    private var vmEmail: String = ""
-    private var vmPassword: String = ""
-
-    private var loginToken: String = ""
-    private var refreshToken: String = ""
+    private val _registrationLiveData: MutableLiveData<RegistrationState> =
+        MutableLiveData(RegistrationState.FirstInit)
+    val registrationLiveData: LiveData<RegistrationState> = _registrationLiveData
 
     fun postDataToRepository(name: String, phone: String, email: String, password: String) {
-        registrationRepository.registration(
+        registrationRepository.registrationUser(
             RegistrationUserModel(
                 username = name,
                 email = email,
@@ -34,65 +36,59 @@ class RegistrationViewModel @Inject constructor(private val registrationReposito
                 fullName = name
             )
         )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                registrationLiveData.value = RegistrationState.Loading
-                getClientToken(it.username)
-                vmPassword = password
-                vmEmail = email
-            }, {
-                registrationLiveData.value = RegistrationState.Error
-            })
-            .let(compositeDisposable::add)
-    }
-
-    private fun getClientToken(name: String) {
-        registrationRepository.getClientToken(
-            RegistrationClientModel(
-                name = name,
-                allowedGrantTypes = ALLOWED_GRANT_TYPES
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                getLoginToken(
+            .flatMap {
+                sharedPreferenceRepository.saveStringToPreference(APP_PREFERENCE_EMAIL, email)
+                sharedPreferenceRepository.saveStringToPreference(APP_PREFERENCE_PASSWORD, password)
+                registrationRepository.getClientToken(
+                    RegistrationClientModel(
+                        name = name,
+                        allowedGrantTypes = ALLOWED_GRANT_TYPES
+                    )
+                )
+            }
+            .flatMap {
+                registrationRepository.loginClient(
                     id = "${it.id}_" + it.randomId,
                     grantType = "password",
-                    email = vmEmail,
-                    password = vmPassword,
+                    email = sharedPreferenceRepository.getStringFromPreference(APP_PREFERENCE_EMAIL),
+                    password = sharedPreferenceRepository.getStringFromPreference(
+                        APP_PREFERENCE_PASSWORD
+                    ),
                     clientSecret = it.secret
                 )
-                registrationLiveData.value = RegistrationState.Loading
-            }, {
-                registrationLiveData.value = RegistrationState.Error
-            })
-            .let(compositeDisposable::add)
-    }
-
-    private fun getLoginToken(
-        id: String,
-        grantType: String,
-        email: String,
-        password: String,
-        clientSecret: String
-    ) {
-        registrationRepository.loginClient(id, grantType, email, password, clientSecret)
+            }
+            .doOnSubscribe {
+                _registrationLiveData.postValue(RegistrationState.Loading)
+            }
+            .doOnError {
+                _registrationLiveData.postValue(RegistrationState.Error)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                loginToken = it.access_token
-                refreshToken = it.refresh_token
-                registrationLiveData.value = RegistrationState.Success
-
+                _registrationLiveData.value = RegistrationState.Success
+                sharedPreferenceRepository.saveStringToPreference(
+                    APP_PREFERENCE_LOGIN_TOKEN,
+                    it.accessToken
+                )
+                sharedPreferenceRepository.saveStringToPreference(
+                    APP_PREFERENCE_REFRESH_TOKEN,
+                    it.refreshToken
+                )
             }, {
-                registrationLiveData.value = RegistrationState.Error
+                _registrationLiveData.value = RegistrationState.Error
+                _registrationLiveData.value = RegistrationState.FirstInit
+                it.printStackTrace()
             })
+            .let(compositeDisposable::add)
     }
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+
+    companion object {
+        private val ALLOWED_GRANT_TYPES = listOf("refresh_token", "password")
     }
 }

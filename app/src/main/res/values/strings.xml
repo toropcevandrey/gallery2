@@ -15,4 +15,6 @@
     <string name="photo">Photo</string>
     <string name="profile">Profile</string>
     <string name="search">Search</string>
+    <string name="tag_new">New</string>
+    <string name="popular">Popular</string>
 </resources>

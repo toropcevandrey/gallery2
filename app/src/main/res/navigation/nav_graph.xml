@@ -19,11 +19,11 @@
     </fragment>
     <fragment
         android:id="@+id/authorization"
-        android:name="com.example.gallery2.features.authorization.presentation.Authorization"
+        android:name="com.example.gallery2.features.authorization.presentation.AuthorizationFragment"
         android:label="fragment_authorization"
         tools:layout="@layout/fragment_authorization">
         <action
-            android:id="@+id/action_signIn_to_mainFragment"
+            android:id="@+id/navigate_authorization_to_mainFragment"
             app:destination="@id/mainFragment" />
         <action
             android:id="@+id/navigate_authorization_to_registration"
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.gallery2.features.main.MainFragment"
+        android:name="com.example.gallery2.features.mainfragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 </navigation>

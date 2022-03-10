@@ -1,21 +1,17 @@
-package com.example.gallery2.features.registration.data
+package com.example.gallery2.features.authorization.data
 
-import com.example.gallery2.api.models.RegistrationClientModel
-import com.example.gallery2.api.models.RegistrationUserModel
-import com.example.gallery2.api.services.RegistrationApiService
-import com.example.gallery2.features.registration.domain.CreateClientResponseModel
-import com.example.gallery2.features.registration.domain.CreateUserResponseModel
 import com.example.gallery2.api.models.GetTokensModel
-import com.example.gallery2.features.registration.domain.RegistrationRepository
+import com.example.gallery2.api.models.RegistrationClientModel
+import com.example.gallery2.api.services.RegistrationApiService
+import com.example.gallery2.features.authorization.domain.AuthorizationRepository
+import com.example.gallery2.features.registration.domain.CreateClientResponseModel
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-class RegistrationRepositoryImpl @Inject constructor(
+class AuthorizationRepositoryImpl @Inject constructor(
     private val registrationApiService: RegistrationApiService
-) : RegistrationRepository {
+): AuthorizationRepository {
 
-    override fun registrationUser(registrationUserModel: RegistrationUserModel): Single<CreateUserResponseModel> =
-        registrationApiService.createUser(registrationUserModel)
 
     override fun getClientToken(registrationClientModel: RegistrationClientModel): Single<CreateClientResponseModel> =
         registrationApiService.createClient(registrationClientModel)
