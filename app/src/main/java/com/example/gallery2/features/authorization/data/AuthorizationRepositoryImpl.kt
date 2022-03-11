@@ -1,7 +1,7 @@
 package com.example.gallery2.features.authorization.data
 
-import com.example.gallery2.api.models.GetTokensModel
-import com.example.gallery2.api.models.RegistrationClientModel
+import com.example.gallery2.api.models.registrationauthorization.GetTokensModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationClientModel
 import com.example.gallery2.api.services.RegistrationApiService
 import com.example.gallery2.features.authorization.domain.AuthorizationRepository
 import com.example.gallery2.features.registration.domain.CreateClientResponseModel
@@ -10,8 +10,7 @@ import javax.inject.Inject
 
 class AuthorizationRepositoryImpl @Inject constructor(
     private val registrationApiService: RegistrationApiService
-): AuthorizationRepository {
-
+) : AuthorizationRepository {
 
     override fun getClientToken(registrationClientModel: RegistrationClientModel): Single<CreateClientResponseModel> =
         registrationApiService.createClient(registrationClientModel)

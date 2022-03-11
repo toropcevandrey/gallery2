@@ -9,6 +9,7 @@ import javax.inject.Singleton
 
 @Module
 class SharedPreferenceModule(private val context: Context) {
+
     @Provides
     @Singleton
     fun provideSharedPreference(): SharedPreferenceRepository =

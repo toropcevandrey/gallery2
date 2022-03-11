@@ -7,5 +7,6 @@ object Constants {
     const val APP_PREFERENCE_PASSWORD = "password"
     const val APP_PREFERENCE_LOGIN_TOKEN = "login_token"
     const val APP_PREFERENCE_REFRESH_TOKEN = "refresh_token"
-    const val ARG_OBJECT = "object"
+    const val ARG_TABS = "tab_counter"
+    const val BASE_URL_MEDIA = "http://gallery.dev.webant.ru/media/"
 }

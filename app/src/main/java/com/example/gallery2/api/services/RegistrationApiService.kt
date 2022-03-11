@@ -1,10 +1,10 @@
 package com.example.gallery2.api.services
 
-import com.example.gallery2.api.models.RegistrationClientModel
-import com.example.gallery2.api.models.RegistrationUserModel
+import com.example.gallery2.api.models.registrationauthorization.GetTokensModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationClientModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationUserModel
 import com.example.gallery2.features.registration.domain.CreateClientResponseModel
 import com.example.gallery2.features.registration.domain.CreateUserResponseModel
-import com.example.gallery2.api.models.GetTokensModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET

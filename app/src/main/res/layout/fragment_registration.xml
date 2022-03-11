@@ -67,9 +67,9 @@
             android:id="@+id/et_registration_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:hint="@string/user_name"
             android:drawableEnd="@drawable/ic_user_name"
+            android:hint="@string/user_name"
+            android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,10 +92,10 @@
             android:id="@+id/et_registration_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:hint="@string/phone"
             android:drawableEnd="@drawable/ic_phone"
-            android:inputType="phone"/>
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -117,9 +117,9 @@
             android:id="@+id/et_registration_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:inputType="textEmailAddress"
             android:drawableEnd="@drawable/ic_mail"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,8 +144,8 @@
             android:id="@+id/et_registration_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:inputType="textPassword"
+            android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -169,9 +169,9 @@
             android:id="@+id/et_registration_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -199,6 +199,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_registration" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

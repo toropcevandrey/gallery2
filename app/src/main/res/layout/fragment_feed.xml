@@ -38,16 +38,16 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:textAllCaps="false"
-        app:textAllCaps="false"
-        app:tabIndicatorColor="#CF497E"
-        app:tabIndicatorHeight="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextAppearance="@style/MyCustomTextAppearance"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_search" />
+        app:layout_constraintTop_toBottomOf="@+id/til_search"
+        app:tabIndicatorColor="#CF497E"
+        app:tabIndicatorHeight="2dp"
+        app:tabTextAppearance="@style/MyCustomTextAppearance"
+        app:textAllCaps="false" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"

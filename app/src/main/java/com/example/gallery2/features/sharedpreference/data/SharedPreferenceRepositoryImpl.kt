@@ -13,10 +13,8 @@ class SharedPreferenceRepositoryImpl @Inject constructor(context: Context) :
         context.getSharedPreferences(NAME_APP_PREFERENCE, Context.MODE_PRIVATE)
 
     override fun saveStringToPreference(tag: String, data: String) {
-        preference.edit().putString(tag,data).apply()
+        preference.edit().putString(tag, data).apply()
     }
 
     override fun getStringFromPreference(tag: String): String = preference.getString(tag, "") ?: ""
-
-
 }

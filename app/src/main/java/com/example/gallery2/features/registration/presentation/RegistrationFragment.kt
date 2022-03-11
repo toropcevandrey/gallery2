@@ -15,11 +15,6 @@ import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentRegistrationBinding
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RegistrationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegistrationFragment : Fragment() {
 
     @Inject
@@ -33,13 +28,12 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        val view = binding.root
-        App.App.getComponent().inject(this)
+        App.getComponent().inject(this)
         viewModel = ViewModelProvider(this, factory).get(RegistrationViewModel::class.java)
         initViews()
         setObservers()
 
-        return view
+        return binding.root
     }
 
     private fun initViews() {

@@ -17,11 +17,6 @@ import com.example.gallery2.features.registration.presentation.RegistrationFragm
 import com.example.gallery2.features.registration.presentation.RegistrationState
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AuthorizationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AuthorizationFragment : Fragment() {
 
     @Inject
@@ -36,7 +31,7 @@ class AuthorizationFragment : Fragment() {
     ): View {
         _binding = FragmentAuthorizationBinding.inflate(inflater, container, false)
         val view = binding.root
-        App.App.getComponent().inject(this)
+        App.getComponent().inject(this)
         viewModel = ViewModelProvider(this, factory).get(AuthorizationViewModel::class.java)
         initViews()
         setObservers()

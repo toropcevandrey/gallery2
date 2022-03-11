@@ -3,8 +3,8 @@ package com.example.gallery2.features.registration.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gallery2.api.models.RegistrationClientModel
-import com.example.gallery2.api.models.RegistrationUserModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationClientModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationUserModel
 import com.example.gallery2.features.registration.domain.RegistrationRepository
 import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
 import com.example.gallery2.utils.Constants.APP_PREFERENCE_EMAIL

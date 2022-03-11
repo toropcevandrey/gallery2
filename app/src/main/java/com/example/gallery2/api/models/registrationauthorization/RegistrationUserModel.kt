@@ -1,4 +1,4 @@
-package com.example.gallery2.api.models
+package com.example.gallery2.api.models.registrationauthorization
 
 data class RegistrationUserModel(
     val fullName: String,

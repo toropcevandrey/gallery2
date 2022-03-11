@@ -6,6 +6,7 @@ import com.example.gallery2.base.ViewModelFactory
 import com.example.gallery2.di.ViewModelKey
 import com.example.gallery2.features.authorization.presentation.AuthorizationViewModel
 import com.example.gallery2.features.registration.presentation.RegistrationViewModel
+import com.example.gallery2.features.tabfragment.presentation.TabViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -23,6 +24,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthorizationViewModel::class)
     abstract fun bindAuthorizationViewModel(authorizationViewModel: AuthorizationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TabViewModel::class)
+    abstract fun bindTabViewModel(tabViewModel: TabViewModel): ViewModel
+
 
     @Binds
     @Singleton

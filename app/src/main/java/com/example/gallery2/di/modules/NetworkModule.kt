@@ -2,6 +2,7 @@ package com.example.gallery2.di.modules
 
 import android.content.Context
 import com.example.gallery2.BuildConfig
+import com.example.gallery2.api.services.PhotoApiService
 import com.example.gallery2.api.services.RegistrationApiService
 import com.example.gallery2.utils.Constants.BASE_URL
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -33,6 +34,12 @@ class NetworkModule(private val context: Context) {
     @Provides
     fun provideRegistration(retrofit: Retrofit): RegistrationApiService {
         return retrofit.create(RegistrationApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePhotos(retrofit: Retrofit): PhotoApiService {
+        return retrofit.create(PhotoApiService::class.java)
     }
 
     @Singleton

@@ -3,7 +3,7 @@ package com.example.gallery2.features.authorization.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gallery2.api.models.RegistrationClientModel
+import com.example.gallery2.api.models.registrationauthorization.RegistrationClientModel
 import com.example.gallery2.features.authorization.domain.AuthorizationRepository
 import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
 import com.example.gallery2.utils.Constants

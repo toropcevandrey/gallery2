@@ -1,4 +1,4 @@
-package com.example.gallery2.api.models
+package com.example.gallery2.api.models.registrationauthorization
 
 import com.google.gson.annotations.SerializedName
 

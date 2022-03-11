@@ -8,7 +8,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_webant_logo" />
+            android:src="@drawable/ic_webant_launch" />
     </item>
 
 </layer-list>
