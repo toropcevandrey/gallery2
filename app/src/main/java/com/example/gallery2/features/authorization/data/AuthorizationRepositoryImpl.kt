@@ -15,6 +15,15 @@ class AuthorizationRepositoryImpl @Inject constructor(
     override fun getClientToken(registrationClientModel: RegistrationClientModel): Single<CreateClientResponseModel> =
         registrationApiService.createClient(registrationClientModel)
 
+    override fun refreshClient(
+        id: String,
+        grantType: String,
+        refreshToken: String,
+        clientSecret: String
+    ): Single<GetTokensModel> =
+        registrationApiService.refreshClient(id, grantType, refreshToken, clientSecret)
+
+
     override fun loginClient(
         id: String,
         grantType: String,

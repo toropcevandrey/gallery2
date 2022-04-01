@@ -22,12 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="tv_registration,
+        cv_card,
         et_registration_confirm_password,
         et_registration_email,
         et_registration_password,
         et_registration_confirm_password,
         et_registration_phone,
-        et_registration_user_name,
+        et_search,
         btn_authorization,
         btn_registration,
         til_password,
@@ -37,17 +38,31 @@
         til_user_name"
         tools:ignore="NotSibling" />
 
-    <TextView
-        android:id="@+id/tv_registration"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_card"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/sign_up"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:background="@color/purple" />
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_user_name"
@@ -56,12 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="29dp"
+        android:textColorHint="@color/main_gray"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="1dp"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_registration">
+        app:layout_constraintTop_toBottomOf="@+id/cv_card">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_registration_user_name"
@@ -80,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="29dp"
+        android:textColorHint="@color/main_gray"
         android:textSize="17sp"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="1dp"
@@ -106,6 +123,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="29dp"
         android:hint="@string/email"
+        android:textColorHint="@color/main_gray"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="1dp"
         app:hintTextColor="@color/black"
@@ -131,6 +149,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="29dp"
         android:hint="@string/password"
+        android:textColorHint="@color/main_gray"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="1dp"
         app:hintTextColor="@color/black"
@@ -156,6 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="29dp"
+        android:textColorHint="@color/main_gray"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="1dp"
         app:hintTextColor="@color/black"

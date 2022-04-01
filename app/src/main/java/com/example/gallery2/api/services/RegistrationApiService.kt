@@ -27,4 +27,12 @@ interface RegistrationApiService {
         @Query("password") password: String,
         @Query("client_secret") clientSecret: String
     ): Single<GetTokensModel>
+
+    @GET("/oauth/v2/token")
+    fun refreshClient(
+        @Query("client_id") id: String,
+        @Query("grant_type") grantType: String,
+        @Query("refresh_token") refreshToken: String,
+        @Query("client_secret") clientSecret: String
+    ): Single<GetTokensModel>
 }

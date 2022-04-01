@@ -31,7 +31,7 @@ class AuthorizationFragment : Fragment() {
     ): View {
         _binding = FragmentAuthorizationBinding.inflate(inflater, container, false)
         val view = binding.root
-        App.getComponent().inject(this)
+        App.component.inject(this)
         viewModel = ViewModelProvider(this, factory).get(AuthorizationViewModel::class.java)
         initViews()
         setObservers()
@@ -68,7 +68,7 @@ class AuthorizationFragment : Fragment() {
 
             if (isSuccess) {
                 findNavController().navigate(
-                    AuthorizationFragmentDirections.navigateAuthorizationToMainFragment()
+                    AuthorizationFragmentDirections.navigateAuthorizationToHomeFragment()
                 )
             }
 
@@ -77,5 +77,10 @@ class AuthorizationFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

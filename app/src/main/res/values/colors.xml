@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button">#1D1D1D</color>
     <color name="gray_text">#333333</color>
+    <color name="purple">#CF497E</color>
+    <color name="main_gray">#C4C4C4</color>
+    <color name="search_background">#1F8E8E93</color>
+    <color name="search_text">#66000000</color>
 </resources>

@@ -19,7 +19,7 @@ class TabViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView)
             .load(BASE_URL_MEDIA + image)
             .placeholder(R.drawable.progress_animation)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
             .into(iv)
     }

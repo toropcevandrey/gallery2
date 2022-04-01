@@ -7,6 +7,9 @@ import com.example.gallery2.api.models.registrationauthorization.RegistrationCli
 import com.example.gallery2.features.authorization.domain.AuthorizationRepository
 import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
 import com.example.gallery2.utils.Constants
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_ID
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_SECRET
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_USER_ID
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -23,10 +26,22 @@ class AuthorizationViewModel @Inject constructor(
     val authorizationLiveData: LiveData<AuthorizationState> = _authorizationLiveData
 
     fun postDataToRepository(email: String, password: String) {
+        sharedPreferenceRepository.saveStringToPreference(Constants.APP_PREFERENCE_EMAIL, email)
+        sharedPreferenceRepository.saveStringToPreference(
+            Constants.APP_PREFERENCE_PASSWORD,
+            password
+        )
+
         authorizationRepository.getClientToken(
             RegistrationClientModel(name = email, allowedGrantTypes = ALLOWED_GRANT_TYPES)
         )
             .flatMap {
+                sharedPreferenceRepository.saveIntToPreference(APP_PREFERENCE_USER_ID, it.id)
+                sharedPreferenceRepository.saveStringToPreference(
+                    APP_PREFERENCE_ID,
+                    "${it.id}_" + it.randomId
+                )
+                sharedPreferenceRepository.saveStringToPreference(APP_PREFERENCE_SECRET, it.secret)
                 authorizationRepository.loginClient(
                     id = "${it.id}_" + it.randomId,
                     grantType = "password",

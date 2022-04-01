@@ -7,5 +7,30 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.example.gallery2.features.feed.presentation.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment" >
+        <action
+            android:id="@+id/navigate_feedFragment_to_bottomFragment"
+            app:destination="@id/bottomFragment" />
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/bottomFragment"
+        android:name="com.example.gallery2.features.bottomdialog.BottomFragment"
+        android:label="BottomFragment" >
+        <action
+            android:id="@+id/navigate_bottomFragment_to_addPhotoFragment"
+            app:destination="@id/addPhotoFragment" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/addPhotoFragment"
+        android:name="com.example.gallery2.features.addphoto.presentation.AddPhotoFragment"
+        android:label="AddPhotoFragment" >
+        <action
+            android:id="@+id/navigate_addPhotoFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
+
+
 </navigation>

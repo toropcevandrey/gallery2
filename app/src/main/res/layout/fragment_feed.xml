@@ -6,35 +6,34 @@
     android:background="@color/white"
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_search"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_feed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        app:boxBackgroundColor="#DADADA"
-        app:boxCornerRadiusBottomEnd="14dp"
-        app:boxCornerRadiusBottomStart="14dp"
-        app:boxCornerRadiusTopEnd="14dp"
-        app:boxCornerRadiusTopStart="14dp"
-        app:boxStrokeColor="@color/black"
-        app:boxStrokeWidth="1dp"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_user_name"
+        
+        <androidx.cardview.widget.CardView
+            android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_height="match_parent"
+            android:elevation="0dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="10dp">
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/search_background"
             android:drawableStart="@drawable/ic_search"
             android:hint="@string/search"
-            android:padding="10dp"
-            android:textColor="#939393"
+            android:textColor="@color/black"
+            android:textColorHint="@color/search_text"
             android:textSize="17sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -43,11 +42,24 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_search"
-        app:tabIndicatorColor="#CF497E"
+        app:layout_constraintTop_toBottomOf="@+id/tb_feed"
+        app:tabIndicatorColor="@color/purple"
         app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/MyCustomTextAppearance"
+        app:tabTextColor="@color/main_gray"
         app:textAllCaps="false" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        android:backgroundTint="@color/main_gray"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@id/pager"
+        app:layout_constraintEnd_toEndOf="@id/pager" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"

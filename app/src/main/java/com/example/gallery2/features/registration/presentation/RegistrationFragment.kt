@@ -28,7 +28,7 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        App.getComponent().inject(this)
+        App.component.inject(this)
         viewModel = ViewModelProvider(this, factory).get(RegistrationViewModel::class.java)
         initViews()
         setObservers()
@@ -68,7 +68,7 @@ class RegistrationFragment : Fragment() {
 
             if (isSuccess) {
                 findNavController().navigate(
-                    RegistrationFragmentDirections.navigateRegistrationToMainFragment()
+                    RegistrationFragmentDirections.navigateRegistrationToHomeFragment()
                 )
             }
 
@@ -77,6 +77,11 @@ class RegistrationFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

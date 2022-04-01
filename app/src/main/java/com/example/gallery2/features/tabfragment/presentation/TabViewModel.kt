@@ -13,24 +13,95 @@ class TabViewModel @Inject constructor(
     private val tabRepository: TabRepository
 ) : ViewModel() {
 
-    private val _tabViewData: MutableLiveData<List<TabViewData>> = MutableLiveData()
-    val tabViewData: LiveData<List<TabViewData>> = _tabViewData
-    private var viewList: MutableList<TabViewData> = mutableListOf()
+    private val _tabLiveData: MutableLiveData<TabState> = MutableLiveData()
+    val tabLiveData: LiveData<TabState> = _tabLiveData
     private val compositeDisposable = CompositeDisposable()
+    private val photoList: MutableList<TabViewData> = mutableListOf()
+    private val searchList: MutableList<TabViewData> = mutableListOf()
+    private var page: Int = 1
+    private var tab: Int = 0
+    private var news: Boolean = false
+    private var popular: Boolean = false
+    private var query: String = ""
+    private var isSearch: Boolean = false
 
-    fun postDataToRepository(news: Boolean, popular: Boolean) {
-        tabRepository.getDataFromApi(news, popular)
+    fun postDataToRepository(tab: Int) {
+        if (photoList.isNotEmpty()) return
+        this.tab = tab
+        when (tab) {
+            0 -> news = true
+            1 -> popular = true
+        }
+        tabRepository.getDataFromApi(news, popular, page, query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                it.data.forEach {
-                    viewList.add(TabViewData(id = it.id, image = it.image.name))
-                }
-                _tabViewData.value = viewList
+                photoList.addAll(it.data.map { data ->
+                    TabViewData(id = data.id, image = data.image.name)
+                })
+
+                _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
             }, {
 
             })
             .let(compositeDisposable::add)
+    }
+
+    fun loadNextPage() {
+        page++
+        _tabLiveData.value = TabState.Loading
+        if (!isSearch) {
+            tabRepository.getDataFromApi(news, popular, page, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    photoList.addAll(it.data.map { data ->
+                        TabViewData(id = data.id, image = data.image.name)
+                    })
+                    _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
+                }, {
+
+                })
+                .let(compositeDisposable::add)
+        } else {
+            tabRepository.getDataFromApi(news, popular, page, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    searchList.addAll(it.data.map { data ->
+                        TabViewData(id = data.id, image = data.image.name)
+                    })
+                    _tabLiveData.value = TabState.Success(searchList.map { it.copy() })
+                }, {
+
+                })
+                .let(compositeDisposable::add)
+        }
+    }
+
+    fun onSearchEntered(query: String) {
+        if (this.query == query) return
+        page = 1
+        searchList.clear()
+        this.query = query
+        if (query.isNotEmpty()) {
+            isSearch = true
+            tabRepository.getDataFromApi(news, popular, page, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    searchList.addAll(it.data.map { data ->
+                        TabViewData(id = data.id, image = data.image.name)
+                    })
+                    _tabLiveData.value = TabState.Success(searchList.map { it.copy() })
+                }, {
+
+                })
+                .let(compositeDisposable::add)
+        } else {
+            isSearch = false
+            _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
+        }
     }
 
     override fun onCleared() {

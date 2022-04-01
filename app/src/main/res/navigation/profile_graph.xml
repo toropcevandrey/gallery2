@@ -2,9 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/profile_graph"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/profileFragment">
     <fragment
-        android:id="@+id/authorizationFragment"
-        android:name="com.example.gallery2.features.authorization.presentation.AuthorizationFragment"
-        android:label="AuthorizationFragment" />
+        android:id="@+id/profileFragment"
+        android:name="com.example.gallery2.features.profile.presentation.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/navigate_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/navigate_profileFragment_to_feed_graph"
+            app:destination="@id/feed_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.gallery2.features.settings.presentation.SettingsFragment"
+        android:label="SettingsFragment" />
+    <include app:graph="@navigation/feed_graph" />
 </navigation>

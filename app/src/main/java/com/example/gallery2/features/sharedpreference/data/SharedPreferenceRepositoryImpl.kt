@@ -6,7 +6,7 @@ import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRep
 import com.example.gallery2.utils.Constants.NAME_APP_PREFERENCE
 import javax.inject.Inject
 
-class SharedPreferenceRepositoryImpl @Inject constructor(context: Context) :
+class SharedPreferenceRepositoryImpl(context: Context) :
     SharedPreferenceRepository {
 
     private val preference: SharedPreferences =
@@ -16,5 +16,11 @@ class SharedPreferenceRepositoryImpl @Inject constructor(context: Context) :
         preference.edit().putString(tag, data).apply()
     }
 
+    override fun saveIntToPreference(tag: String, data: Int) {
+        preference.edit().putInt(tag, data).apply()
+    }
+
     override fun getStringFromPreference(tag: String): String = preference.getString(tag, "") ?: ""
+
+    override fun getIntFromPreference(tag: String): Int = preference.getInt(tag, 0)
 }

@@ -1,7 +1,7 @@
 package com.example.gallery2.features.mainactivity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gallery2.R
 
 class MainActivity : AppCompatActivity() {
