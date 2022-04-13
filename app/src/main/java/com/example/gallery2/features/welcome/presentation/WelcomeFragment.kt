@@ -42,7 +42,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun checkUser() {
-        viewModel.postDataToRepository()
+        viewModel.checkAvailabilityTokens()
     }
 
     private fun bindViews() {

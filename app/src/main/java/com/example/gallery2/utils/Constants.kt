@@ -4,6 +4,7 @@ object Constants {
     const val BASE_URL = "http://gallery.dev.webant.ru/"
     const val NAME_APP_PREFERENCE = "settings"
     const val APP_PREFERENCE_EMAIL = "email"
+    const val APP_PREFERENCE_TOKEN_TIME = "token_time"
     const val APP_PREFERENCE_ID = "id"
     const val APP_PREFERENCE_USER_ID = "user_id"
     const val APP_PREFERENCE_SECRET = "secret"

@@ -19,6 +19,12 @@ class SharedPreferenceRepositoryImpl(context: Context) :
         preference.edit().putInt(tag, data).apply()
     }
 
+    override fun saveLongToPreference(tag: String, data: Long) {
+        preference.edit().putLong(tag, data).apply()
+    }
+
+    override fun getLongFromPreference(tag: String): Long = preference.getLong(tag, 0)
+
     override fun getStringFromPreference(tag: String): String = preference.getString(tag, "") ?: ""
 
     override fun getIntFromPreference(tag: String): Int = preference.getInt(tag, 0)

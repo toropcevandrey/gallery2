@@ -11,8 +11,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.gallery2.App
 import com.example.gallery2.R
+import com.example.gallery2.api.models.ValidateState
 import com.example.gallery2.databinding.FragmentAuthorizationBinding
 import com.example.gallery2.utils.Constants.TOAST_USER_NOT_VALID_PAIR_EMAIL_PASSWORD
+import com.example.gallery2.utils.Constants.TOAST_USER_NULL_FIELDS_SETTINGS
 import toast
 import javax.inject.Inject
 
@@ -50,7 +52,7 @@ class AuthorizationFragment : Fragment() {
         }
 
         binding.btnAuthorization.setOnClickListener {
-            viewModel.postDataToRepository(
+            viewModel.checkNotNullFields(
                 binding.etEmail.text.toString(),
                 binding.etPassword.text.toString()
             )
@@ -76,6 +78,13 @@ class AuthorizationFragment : Fragment() {
             if (isError) {
                 requireActivity().toast(TOAST_USER_NOT_VALID_PAIR_EMAIL_PASSWORD)
             }
+        }
+
+        viewModel.validateLiveData.observe(viewLifecycleOwner) { state ->
+            val isEmpty = state is ValidateState.IsEmpty
+
+            if (isEmpty) requireContext().toast(TOAST_USER_NULL_FIELDS_SETTINGS)
+
         }
     }
 

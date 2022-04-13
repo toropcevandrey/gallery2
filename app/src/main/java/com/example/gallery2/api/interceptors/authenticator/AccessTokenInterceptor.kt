@@ -7,6 +7,7 @@ import com.example.gallery2.utils.Constants.APP_PREFERENCE_ID
 import com.example.gallery2.utils.Constants.APP_PREFERENCE_LOGIN_TOKEN
 import com.example.gallery2.utils.Constants.APP_PREFERENCE_REFRESH_TOKEN
 import com.example.gallery2.utils.Constants.APP_PREFERENCE_SECRET
+import com.example.gallery2.utils.Constants.APP_PREFERENCE_TOKEN_TIME
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.Interceptor
@@ -30,6 +31,8 @@ class AccessTokenInterceptor @Inject constructor() : Interceptor {
             App.component.inject(this)
         }
 
+        val tokenTime = System.currentTimeMillis()
+
         val token =
             sharedPreferenceRepository.getStringFromPreference(APP_PREFERENCE_LOGIN_TOKEN)
 
@@ -37,6 +40,7 @@ class AccessTokenInterceptor @Inject constructor() : Interceptor {
             .newBuilder()
             .addHeader("Authorization", "Bearer $token")
             .build()
+
         val response = chain.proceed(request)
 
         if (response.code == 401) {
@@ -53,6 +57,10 @@ class AccessTokenInterceptor @Inject constructor() : Interceptor {
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    sharedPreferenceRepository.saveLongToPreference(
+                        APP_PREFERENCE_TOKEN_TIME, tokenTime
+                    )
+
                     sharedPreferenceRepository.saveStringToPreference(
                         APP_PREFERENCE_LOGIN_TOKEN, it.accessToken
                     )
@@ -61,7 +69,7 @@ class AccessTokenInterceptor @Inject constructor() : Interceptor {
                     )
                 },
                     {
-
+                        it.printStackTrace()
                     })
 
             val newToken: String? =
