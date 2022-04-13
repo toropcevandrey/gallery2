@@ -7,15 +7,20 @@
     <string name="sign_out">Sign Out</string>
     <string name="already_have_account">I already have an account</string>
     <string name="forgot_login_password">Forgot login or password?</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">User Name<font color='#E80000'>*</font></string>
+    <string name="user_name_settings">User Name</string>
     <string name="photo_name">Name</string>
     <string name="description">Description</string>
-    <string name="phone">Phone</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="phone">Phone<font color='#E80000'>*</font></string>
+    <string name="phone_settings">Phone</string>
+    <string name="email">Email<font color='#E80000'>*</font></string>
+    <string name="email_settings">Email</string>
+    <string name="password">Password<font color='#E80000'>*</font></string>
+    <string name="password_settings">Password</string>
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
-    <string name="confirm_password">Confirm password</string>
+    <string name="confirm_password">Confirm password<font color='#E80000'>*</font></string>
+    <string name="confirm_password_settings">Confirm password</string>
     <string name="feed">Feed</string>
     <string name="views">Views:</string>
     <string name="loaded">Loaded:</string>
@@ -33,4 +38,9 @@
     <string name="email_address">E-mail address</string>
     <string name="camera">Камера</string>
     <string name="gallery">Галерея</string>
+    <string name="add">Add</string>
+    <string name="_228">228+</string>
+    <string name="_20_20_2000">20.20.2000</string>
+    <string name="connection_error">Connection error,\n please try again</string>
+    <string name="refresh">Refresh</string>
 </resources>

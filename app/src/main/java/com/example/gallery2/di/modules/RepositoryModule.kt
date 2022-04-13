@@ -8,6 +8,8 @@ import com.example.gallery2.features.addphoto.data.AddPhotoRepositoryImpl
 import com.example.gallery2.features.addphoto.domain.AddPhotoRepository
 import com.example.gallery2.features.authorization.data.AuthorizationRepositoryImpl
 import com.example.gallery2.features.authorization.domain.AuthorizationRepository
+import com.example.gallery2.features.openphoto.data.OpenPhotoRepositoryImpl
+import com.example.gallery2.features.openphoto.domain.OpenPhotoRepository
 import com.example.gallery2.features.profile.data.ProfileRepositoryImpl
 import com.example.gallery2.features.profile.domain.ProfileRepository
 import com.example.gallery2.features.registration.data.RegistrationRepositoryImpl
@@ -39,6 +41,13 @@ class RepositoryModule {
     @Singleton
     fun provideTabRepository(photoApiService: PhotoApiService): TabRepository =
         TabRepositoryImpl(photoApiService)
+    @Provides
+    @Singleton
+    fun provideOpenPhoto(
+        photoApiService: PhotoApiService,
+        userApiService: UserApiService
+    ): OpenPhotoRepository =
+        OpenPhotoRepositoryImpl(photoApiService, userApiService)
 
     @Provides
     @Singleton
@@ -50,7 +59,8 @@ class RepositoryModule {
     fun provideProfileRepository(
         photoApiService: PhotoApiService,
         userApiService: UserApiService
-    ): ProfileRepository = ProfileRepositoryImpl(photoApiService, userApiService)
+    ): ProfileRepository =
+        ProfileRepositoryImpl(photoApiService, userApiService)
 
     @Provides
     @Singleton

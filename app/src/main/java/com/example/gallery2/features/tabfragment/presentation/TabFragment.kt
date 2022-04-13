@@ -4,28 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.gallery2.App
 import com.example.gallery2.databinding.FragmentTabBinding
 import com.example.gallery2.features.feed.presentation.SharedViewModel
 import com.example.gallery2.utils.Constants.ARG_TABS
 import javax.inject.Inject
 
-class TabFragment : Fragment() {
+class TabFragment : Fragment(), TabListAdapter.OnPhotoClickListener {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private var viewModel: TabViewModel? = null
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private lateinit var rvTab: RecyclerView
-    private var listAdapter = TabListAdapter()
-    private lateinit var pg: ProgressBar
+    private lateinit var listAdapter: TabListAdapter
+    private var tab = 1
     private var _binding: FragmentTabBinding? = null
     private val binding get() = _binding!!
 
@@ -45,16 +47,22 @@ class TabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey(ARG_TABS) }?.apply {
-            viewModel?.postDataToRepository(getInt(ARG_TABS))
+            tab = getInt(ARG_TABS)
+            viewModel?.postDataToRepository(tab)
         }
     }
 
     private fun initViews() {
-        pg = binding.pg
-        rvTab = binding.rvTab
-        rvTab.adapter = listAdapter
-        rvTab.layoutManager = GridLayoutManager(binding.root.context, 2)
+        listAdapter = TabListAdapter(this)
+        binding.rvTab.adapter = listAdapter
+        binding.rvTab.layoutManager = GridLayoutManager(binding.root.context, 2)
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel?.refreshData(tab)
+        }
+    }
 
+    override fun onPhotoClick(id: String) {
+        sharedViewModel.sendPhotoId(id)
     }
 
     private fun setObservers() {
@@ -63,7 +71,12 @@ class TabFragment : Fragment() {
             val isLoading = state is TabState.Loading
             val isSuccess = state is TabState.Success
 
-            pg.isVisible = isLoading
+            binding.rvTab.isVisible = isSuccess || isLoading
+            binding.rvTab.isGone = isError
+            binding.ivError.isVisible = isError
+            binding.pg.isVisible = isLoading
+            binding.swipeRefresh.isRefreshing = false
+
             if (isSuccess) {
                 listAdapter.submitList((state as TabState.Success).tab)
             }
@@ -75,7 +88,7 @@ class TabFragment : Fragment() {
     }
 
     private fun rvAddOnScrollListener() {
-        rvTab.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rvTab.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var isLoaded = false
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -92,6 +105,7 @@ class TabFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.swipeRefresh.removeAllViews()
         _binding = null
     }
 }

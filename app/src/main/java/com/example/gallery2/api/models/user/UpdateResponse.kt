@@ -1,0 +1,32 @@
+package com.example.gallery2.api.models.user
+
+data class UpdateResponse(
+    val accountNonExpired: Boolean,
+    val accountNonLocked: Boolean,
+    val birthday: String,
+    val code: String,
+    val confirmationToken: String,
+    val credentialsNonExpired: Boolean,
+    val email: String,
+    val emailCanonical: String,
+    val enabled: Boolean,
+    val fullName: String,
+    val group: List<String>,
+    val groups: List<String>,
+    val id: Int,
+    val lastLogin: String,
+    val newPassword: String,
+    val oldPassword: String,
+    val password: String,
+    val passwordRequestedAt: String,
+    val phone: String,
+    val photos: List<String>,
+    val plainPassword: String,
+    val roles: List<String>,
+    val rolesRaw: List<String>,
+    val salt: String,
+    val superAdmin: Boolean,
+    val user: Boolean,
+    val username: String,
+    val usernameCanonical: String
+)

@@ -1,5 +1,6 @@
 package com.example.gallery2.features.bottomdialog
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +13,41 @@ import com.example.gallery2.BuildConfig
 import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentBottomDialogBinding
 import com.example.gallery2.utils.Constants.PHOTO_URI
+import com.example.gallery2.utils.Constants.TOAST_PERMISSION_CAMERA
+import com.example.gallery2.utils.Constants.TOAST_PERMISSION_STORAGE
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import getFileName
 import org.apache.commons.io.IOUtils
+import toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-
 class BottomFragment : BottomSheetDialogFragment() {
+
+    private val requestCameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {isGranted ->
+            if (isGranted){
+                createImageFile().let { tempFile ->
+                    FileProvider.getUriForFile(
+                        requireContext(), "${BuildConfig.APPLICATION_ID}${".provider"}", tempFile
+                    ).let {
+                        getCameraImage.launch(it)
+                    }
+                }
+            } else {
+                requireContext().toast(TOAST_PERMISSION_CAMERA)
+            }
+        }
+
+    private val requestStoragePermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {isGranted ->
+            if (isGranted){
+                getGalleryImage.launch("image/*")
+            } else {
+                requireContext().toast(TOAST_PERMISSION_STORAGE)
+            }
+        }
 
     private val getCameraImage =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
@@ -47,7 +74,7 @@ class BottomFragment : BottomSheetDialogFragment() {
                 val outputStream = FileOutputStream(file)
                 IOUtils.copy(inputStream, outputStream)
 
-                bundle.putString(PHOTO_URI,file.absolutePath)
+                bundle.putString(PHOTO_URI, file.absolutePath)
             }
 
             findNavController().navigate(
@@ -58,8 +85,6 @@ class BottomFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentBottomDialogBinding? = null
     private val binding get() = _binding!!
     private var tempFilePath = ""
-    private lateinit var ivCamera: ImageView
-    private lateinit var ivFolder: ImageView
     private val bundle = Bundle()
 
     override fun onCreateView(
@@ -85,31 +110,17 @@ class BottomFragment : BottomSheetDialogFragment() {
     }
 
     private fun initViews() {
-        ivCamera = binding.ivCam
-        ivFolder = binding.ivFolder
-
-        ivCamera.setOnClickListener {
-
-            createImageFile().let { tempFile ->
-                FileProvider.getUriForFile(
-                    requireContext(), "${BuildConfig.APPLICATION_ID}${".provider"}", tempFile
-                ).let {
-                    getCameraImage.launch(it)
-                }
-            }
-
-
+        binding.ivCam.setOnClickListener {
+            requestCameraPermission.launch(Manifest.permission.CAMERA)
         }
 
-        ivFolder.setOnClickListener {
-            getGalleryImage.launch("image/*")
+        binding.ivFolder.setOnClickListener {
+            requestStoragePermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

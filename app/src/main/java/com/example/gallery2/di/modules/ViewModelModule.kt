@@ -6,6 +6,7 @@ import com.example.gallery2.base.ViewModelFactory
 import com.example.gallery2.di.ViewModelKey
 import com.example.gallery2.features.addphoto.presentation.AddPhotoViewModel
 import com.example.gallery2.features.authorization.presentation.AuthorizationViewModel
+import com.example.gallery2.features.openphoto.presentation.OpenPhotoViewModel
 import com.example.gallery2.features.profile.presentation.ProfileViewModel
 import com.example.gallery2.features.registration.presentation.RegistrationViewModel
 import com.example.gallery2.features.settings.presentation.SettingsViewModel
@@ -33,6 +34,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WelcomeViewModel::class)
     abstract fun bindWelcomeViewModel(welcomeViewModel: WelcomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OpenPhotoViewModel::class)
+    abstract fun bindOpenPhotoViewModel(openPhotoViewModel: OpenPhotoViewModel): ViewModel
 
     @Binds
     @IntoMap

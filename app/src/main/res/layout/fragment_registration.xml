@@ -8,7 +8,7 @@
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <ProgressBar
-        android:id="@+id/pb_registration_loading"
+        android:id="@+id/pb_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
@@ -18,25 +18,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_registration"
+        android:id="@+id/group_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="tv_registration,
         cv_card,
-        et_registration_confirm_password,
-        et_registration_email,
-        et_registration_password,
-        et_registration_confirm_password,
-        et_registration_phone,
+        et_confirm_password,
+        et_email,
+        et_password,
+        et_confirm_password,
+        et_phone,
         et_search,
+        tb_registration,
         btn_authorization,
         btn_registration,
         til_password,
         til_confirm_password,
         til_email,
+        line_two,
         til_phone,
         til_user_name"
         tools:ignore="NotSibling" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_registration"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
+
+        <TextView
+            android:id="@+id/iv_tb_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/cancel"
+            android:textSize="17sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/line_two"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tb_registration" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_card"
@@ -80,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cv_card">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_user_name"
+            android:id="@+id/et_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_user_name"
@@ -106,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_user_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_phone"
+            android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_phone"
@@ -132,7 +160,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_phone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_email"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_mail"
@@ -160,7 +188,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_password"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -186,7 +214,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_registration_confirm_password"
+            android:id="@+id/et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/confirm_password"

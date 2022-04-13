@@ -14,10 +14,14 @@ class RegistrationRepositoryImpl @Inject constructor(
     private val registrationApiService: RegistrationApiService
 ) : RegistrationRepository {
 
-    override fun registrationUser(registrationUserModel: RegistrationUserModel): Single<CreateUserResponseModel> =
+    override fun registrationUser(
+        registrationUserModel: RegistrationUserModel
+    ): Single<CreateUserResponseModel> =
         registrationApiService.createUser(registrationUserModel)
 
-    override fun getClientToken(registrationClientModel: RegistrationClientModel): Single<CreateClientResponseModel> =
+    override fun getClientToken(
+        registrationClientModel: RegistrationClientModel
+    ): Single<CreateClientResponseModel> =
         registrationApiService.createClient(registrationClientModel)
 
     override fun loginClient(

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/welcome_graph"
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
@@ -47,5 +47,24 @@
         android:id="@+id/homeFragment"
         android:name="com.example.gallery2.features.homefragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/navigate_homeFragment_to_openPhotoFragment"
+            app:destination="@id/openPhotoFragment">
+            <argument
+                android:name="photo_id"
+                app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/navigate_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openPhotoFragment"
+        android:name="com.example.gallery2.features.openphoto.presentation.OpenPhotoFragment"
+        android:label="OpenPhotoFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.gallery2.features.settings.presentation.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

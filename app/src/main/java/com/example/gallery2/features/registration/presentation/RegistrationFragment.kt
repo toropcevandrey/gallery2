@@ -8,11 +8,16 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.gallery2.App
-import com.example.gallery2.R
+import com.example.gallery2.api.models.ValidateState
 import com.example.gallery2.databinding.FragmentRegistrationBinding
+import com.example.gallery2.utils.Constants.ERROR_CONNECTION
+import com.example.gallery2.utils.Constants.TOAST_USER_DIFFERENT_PASSWORDS
+import com.example.gallery2.utils.Constants.TOAST_USER_NOT_VALID_EMAIL
+import com.example.gallery2.utils.Constants.TOAST_USER_NULL_FIELDS
+import com.example.gallery2.utils.Constants.TOAST_USER_REGISTRATION_SUCCESS
+import toast
 import javax.inject.Inject
 
 class RegistrationFragment : Fragment() {
@@ -37,20 +42,23 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.btnAuthorization.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.navigate_registration_to_authorization,
-                null
+        binding.btnAuthorization.setOnClickListener {
+            findNavController().navigate(
+                RegistrationFragmentDirections.navigateRegistrationToAuthorization()
             )
-        )
+        }
+
+        binding.ivTbBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         binding.btnRegistration.setOnClickListener {
-            viewModel.postDataToRepository(
-                binding.etRegistrationUserName.text.toString(),
-                binding.etRegistrationPhone.text.toString(),
-                binding.etRegistrationEmail.text.toString(),
-                binding.etRegistrationPassword.text.toString(),
-                //add confirm password
+            viewModel.validateData(
+                name = binding.etUserName.text.toString(),
+                phone = binding.etPhone.text.toString(),
+                email = binding.etEmail.text.toString(),
+                password = binding.etPassword.text.toString(),
+                confirmPassword = binding.etConfirmPassword.text.toString()
             )
         }
     }
@@ -62,9 +70,8 @@ class RegistrationFragment : Fragment() {
             val isLoading = state is RegistrationState.Loading
             val isFirstInit = state is RegistrationState.FirstInit
 
-            binding.groupRegistration.isVisible = isFirstInit
-            binding.pbRegistrationLoading.isVisible = isLoading
-
+            binding.groupMain.isVisible = isFirstInit
+            binding.pbLoading.isVisible = isLoading
 
             if (isSuccess) {
                 findNavController().navigate(
@@ -73,9 +80,23 @@ class RegistrationFragment : Fragment() {
             }
 
             if (isError) {
-                Toast.makeText(activity, "123", Toast.LENGTH_SHORT).show()
+                requireContext().toast(ERROR_CONNECTION)
             }
 
+        }
+
+        viewModel.regValidateLiveData.observe(viewLifecycleOwner) { state ->
+            val isSuccess = state is ValidateState.Success
+            val isComparePassword = state is ValidateState.ComparePassword
+            val isWrongEmail = state is ValidateState.WrongEmail
+            val isEmpty = state is ValidateState.IsEmpty
+
+            when {
+                isSuccess -> requireContext().toast(TOAST_USER_REGISTRATION_SUCCESS)
+                isComparePassword -> requireContext().toast(TOAST_USER_DIFFERENT_PASSWORDS)
+                isWrongEmail -> requireContext().toast(TOAST_USER_NOT_VALID_EMAIL)
+                isEmpty -> requireContext().toast(TOAST_USER_NULL_FIELDS)
+            }
         }
     }
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
 import com.example.gallery2.utils.Constants.NAME_APP_PREFERENCE
-import javax.inject.Inject
 
 class SharedPreferenceRepositoryImpl(context: Context) :
     SharedPreferenceRepository {
@@ -23,4 +22,8 @@ class SharedPreferenceRepositoryImpl(context: Context) :
     override fun getStringFromPreference(tag: String): String = preference.getString(tag, "") ?: ""
 
     override fun getIntFromPreference(tag: String): Int = preference.getInt(tag, 0)
+
+    override fun clearPreference() {
+        preference.edit().clear().apply()
+    }
 }

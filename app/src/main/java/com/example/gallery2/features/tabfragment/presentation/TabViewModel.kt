@@ -19,30 +19,35 @@ class TabViewModel @Inject constructor(
     private val photoList: MutableList<TabViewData> = mutableListOf()
     private val searchList: MutableList<TabViewData> = mutableListOf()
     private var page: Int = 1
-    private var tab: Int = 0
+    private var tabVm: Int = 0
     private var news: Boolean = false
     private var popular: Boolean = false
     private var query: String = ""
     private var isSearch: Boolean = false
 
+    fun refreshData(tab: Int) {
+        photoList.clear()
+        postDataToRepository(tab)
+    }
+
     fun postDataToRepository(tab: Int) {
         if (photoList.isNotEmpty()) return
-        this.tab = tab
+        tabVm = tab
         when (tab) {
             0 -> news = true
             1 -> popular = true
         }
-        tabRepository.getDataFromApi(news, popular, page, query)
+        tabRepository.getDataFromApi(news, popular, page = 1, query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 photoList.addAll(it.data.map { data ->
                     TabViewData(id = data.id, image = data.image.name)
                 })
-
                 _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
             }, {
-
+                photoList.clear()
+                _tabLiveData.value = TabState.Error
             })
             .let(compositeDisposable::add)
     }
@@ -60,7 +65,7 @@ class TabViewModel @Inject constructor(
                     })
                     _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
                 }, {
-
+                    _tabLiveData.value = TabState.Error
                 })
                 .let(compositeDisposable::add)
         } else {
@@ -73,7 +78,8 @@ class TabViewModel @Inject constructor(
                     })
                     _tabLiveData.value = TabState.Success(searchList.map { it.copy() })
                 }, {
-
+                    photoList.clear()
+                    _tabLiveData.value = TabState.Error
                 })
                 .let(compositeDisposable::add)
         }
@@ -95,7 +101,8 @@ class TabViewModel @Inject constructor(
                     })
                     _tabLiveData.value = TabState.Success(searchList.map { it.copy() })
                 }, {
-
+                    photoList.clear()
+                    _tabLiveData.value = TabState.Error
                 })
                 .let(compositeDisposable::add)
         } else {
@@ -108,5 +115,4 @@ class TabViewModel @Inject constructor(
         super.onCleared()
         compositeDisposable.dispose()
     }
-
 }

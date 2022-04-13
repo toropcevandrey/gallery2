@@ -2,6 +2,7 @@ package com.example.gallery2.api.services
 
 import com.example.gallery2.api.models.photo.Image
 import com.example.gallery2.api.models.photo.PhotoCollectionModel
+import com.example.gallery2.api.models.photo.PhotoModel
 import com.example.gallery2.api.models.uploadmedia.UploadMediaObjectModel
 import com.example.gallery2.api.models.uploadmedia.UploadPhotoModel
 import io.reactivex.rxjava3.core.Single
@@ -10,6 +11,11 @@ import retrofit2.http.*
 
 
 interface PhotoApiService {
+
+    @GET("/api/photos/{id}")
+    fun getPhoto(
+        @Path("id") id: Int,
+    ): Single<PhotoModel>
 
     @GET("/api/photos")
     fun getPhotoCollection(
@@ -25,7 +31,7 @@ interface PhotoApiService {
     fun getProfilePhotoCollection(
         @Query("user.id") userId: Int? = null,
         @Query("page") page: Int,
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 20,
     ): Single<PhotoCollectionModel>
 
     @Multipart

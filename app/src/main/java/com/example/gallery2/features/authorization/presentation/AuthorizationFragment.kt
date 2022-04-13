@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.gallery2.App
 import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentAuthorizationBinding
-import com.example.gallery2.features.registration.presentation.RegistrationFragmentDirections
-import com.example.gallery2.features.registration.presentation.RegistrationState
+import com.example.gallery2.utils.Constants.TOAST_USER_NOT_VALID_PAIR_EMAIL_PASSWORD
+import toast
 import javax.inject.Inject
 
 class AuthorizationFragment : Fragment() {
@@ -46,11 +45,14 @@ class AuthorizationFragment : Fragment() {
                 null
             )
         )
+        binding.ivTbBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         binding.btnAuthorization.setOnClickListener {
             viewModel.postDataToRepository(
-                binding.etAuthorizationEmail.text.toString(),
-                binding.etAuthorizationPassword.text.toString()
+                binding.etEmail.text.toString(),
+                binding.etPassword.text.toString()
             )
         }
     }
@@ -62,9 +64,8 @@ class AuthorizationFragment : Fragment() {
             val isLoading = state is AuthorizationState.Loading
             val isFirstInit = state is AuthorizationState.FirstInit
 
-            binding.groupAuthorization.isVisible = isFirstInit
-            binding.pbAuthorizationLoading.isVisible = isLoading
-
+            binding.groupMain.isVisible = isFirstInit
+            binding.pbLoading.isVisible = isLoading
 
             if (isSuccess) {
                 findNavController().navigate(
@@ -73,9 +74,8 @@ class AuthorizationFragment : Fragment() {
             }
 
             if (isError) {
-                Toast.makeText(activity, "123", Toast.LENGTH_SHORT).show()
+                requireActivity().toast(TOAST_USER_NOT_VALID_PAIR_EMAIL_PASSWORD)
             }
-
         }
     }
 

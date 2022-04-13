@@ -4,27 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.gallery2.App
-import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentProfileBinding
+import com.example.gallery2.features.feed.presentation.SharedViewModel
 import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), ProfileAdapter.OnPhotoClickListener {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-    private lateinit var viewModel: ProfileViewModel
+    private var viewModel: ProfileViewModel? = null
     private var _binding: FragmentProfileBinding? = null
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val binding get() = _binding!!
-    private lateinit var rvProfile: RecyclerView
-    private var adapter = ProfileAdapter()
+    private lateinit var adapter: ProfileAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,42 +36,67 @@ class ProfileFragment : Fragment() {
         setupViewModel()
         initViews()
         setObservers()
+        rvAddOnScrollListener()
 
         return binding.root
     }
 
     private fun initViews() {
-        rvProfile = binding.rvProfile
-        rvProfile.adapter = adapter
-        rvProfile.layoutManager = GridLayoutManager(binding.root.context, 4)
-        binding.ivTbSettings.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.navigate_profileFragment_to_settingsFragment,
-                null
-            )
-        )
-        binding.ivTbBack.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.feed_graph
-            )
-        )
+        adapter = ProfileAdapter(this)
+        binding.rvProfile.adapter = adapter
+        binding.rvProfile.layoutManager = GridLayoutManager(binding.root.context, 4)
+        binding.ivTbSettings.setOnClickListener {
+            sharedViewModel.openSettings()
+        }
+        binding.ivTbBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.btnRefresh.setOnClickListener {
+            viewModel?.loadProfile()
+        }
     }
 
-    private fun setupViewModel(){
+
+    override fun onPhotoClick(id: String) {
+        sharedViewModel.sendPhotoId(id)
+    }
+
+    private fun setupViewModel() {
         viewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
     }
 
-    private fun setObservers(){
-        viewModel.profileLiveData.observe(viewLifecycleOwner) { state ->
+    private fun setObservers() {
+        viewModel?.profileLiveData?.observe(viewLifecycleOwner) { state ->
             val isSuccess = state is ProfileState.Success
             val isError = state is ProfileState.Error
+            val isLoading = state is ProfileState.Loading
 
-            if (isSuccess){
-                binding.tvProfileName.text = ((state as ProfileState.Success).name)
-                binding.tvProfilePhone.text = (state.phone)
+            binding.pbLoading.isVisible = isLoading
+            binding.groupMain.isVisible = isSuccess
+            binding.groupError.isVisible = isError
+
+            if (isSuccess) {
+                binding.tvName.text = ((state as ProfileState.Success).name)
+                binding.tvPhone.text = (state.phone)
                 adapter.submitList(state.profile)
             }
         }
+    }
+
+    private fun rvAddOnScrollListener() {
+        binding.rvProfile.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            var isLoaded = false
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) && recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE
+                    && !isLoaded
+                ) {
+                    isLoaded = true
+                    viewModel?.loadNextPage()
+                }
+                isLoaded = false
+            }
+        })
     }
 
     override fun onDestroyView() {

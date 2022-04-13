@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/ic_loader"
+    android:toDegrees="0"
+    android:fromDegrees="360"
     android:pivotX="50%"
-    android:pivotY="50%"
-    android:duration="6000">
+    android:pivotY="50%">
 
 </animated-rotate>

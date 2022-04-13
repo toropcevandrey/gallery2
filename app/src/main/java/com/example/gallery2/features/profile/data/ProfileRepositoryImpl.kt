@@ -1,7 +1,7 @@
 package com.example.gallery2.features.profile.data
 
-import com.example.gallery2.api.models.User
 import com.example.gallery2.api.models.photo.PhotoCollectionModel
+import com.example.gallery2.api.models.user.User
 import com.example.gallery2.api.services.PhotoApiService
 import com.example.gallery2.api.services.UserApiService
 import com.example.gallery2.features.profile.domain.ProfileRepository
@@ -13,9 +13,11 @@ class ProfileRepositoryImpl @Inject constructor(
     private val userApiService: UserApiService
 ) : ProfileRepository {
 
+    override fun getUserPhoto(userId: Int, page: Int): Single<PhotoCollectionModel> =
+        photoApiService.getProfilePhotoCollection(
+            userId = userId,
+            page = page
+        )
 
-    override fun getUserPhoto(page: Int, userId: Int): Single<PhotoCollectionModel> =
-        photoApiService.getProfilePhotoCollection(page = page, userId = userId)
-
-    override fun getUserInfo(): Single<User> = userApiService.getUserInfo()
+    override fun getUserInfo(): Single<User> = userApiService.getCurrentUserInfo()
 }

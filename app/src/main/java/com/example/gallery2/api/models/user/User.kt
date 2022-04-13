@@ -1,4 +1,4 @@
-package com.example.gallery2.api.models
+package com.example.gallery2.api.models.user
 
 data class User(
     val birthday: Any,
@@ -8,5 +8,5 @@ data class User(
     val id: Int,
     val phone: String,
     val roles: List<String>,
-    val username: String
+    val username: String?
 )

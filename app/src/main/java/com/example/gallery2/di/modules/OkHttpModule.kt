@@ -1,9 +1,10 @@
 package com.example.gallery2.di.modules
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.gallery2.BuildConfig
 import com.example.gallery2.api.interceptors.authenticator.AccessTokenInterceptor
-import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -41,7 +42,14 @@ class OkHttpModule {
 
         interceptors.add(AccessTokenInterceptor())
         interceptors.add(loggingInterceptor)
-        interceptors.add(ChuckInterceptor(context))
+        interceptors.add(
+            ChuckerInterceptor.Builder(context)
+                .collector(ChuckerCollector(context))
+                .maxContentLength(250000L)
+                .redactHeaders(emptySet())
+                .alwaysReadResponseBody(false)
+                .build()
+        )
         return interceptors
     }
 }

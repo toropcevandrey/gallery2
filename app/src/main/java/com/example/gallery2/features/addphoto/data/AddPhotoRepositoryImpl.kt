@@ -12,6 +12,7 @@ import javax.inject.Inject
 class AddPhotoRepositoryImpl @Inject constructor(
     private val photoApiService: PhotoApiService
 ) : AddPhotoRepository {
+
     override fun uploadMedia(file: MultipartBody.Part): Single<UploadMediaObjectModel> =
         photoApiService.uploadMediaObject(file = file)
 

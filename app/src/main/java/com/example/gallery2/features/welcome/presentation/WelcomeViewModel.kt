@@ -51,10 +51,9 @@ class WelcomeViewModel @Inject constructor(
                     it.refreshToken
                 )
             }, {
+                it.printStackTrace()
                 _welcomeLiveData.value = WelcomeState.Error
             })
             .let(compositeDisposable::add)
     }
-
-
 }

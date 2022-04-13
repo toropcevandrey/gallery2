@@ -9,4 +9,6 @@ interface SharedPreferenceRepository {
     fun getStringFromPreference(tag: String): String
 
     fun getIntFromPreference(tag: String): Int
+
+    fun clearPreference()
 }

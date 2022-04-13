@@ -10,9 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.gallery2.App
-import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentAddPhotoBinding
 import com.example.gallery2.utils.Constants.PHOTO_URI
+import com.example.gallery2.utils.Constants.UPLOAD_PHOTO_SUCCESS
+import toast
 import javax.inject.Inject
 
 class AddPhotoFragment : Fragment() {
@@ -23,12 +24,11 @@ class AddPhotoFragment : Fragment() {
     private var _binding: FragmentAddPhotoBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddPhotoBinding.inflate(inflater, container, false)
         App.component.inject(this)
         bindVm()
@@ -42,19 +42,25 @@ class AddPhotoFragment : Fragment() {
             .load(arguments?.getString(PHOTO_URI))
             .into(binding.ivPhoto)
 
-
-        binding.btnAdd.setOnClickListener {
-            viewModel.sendMediaFile(
-                name = binding.etPhotoName.text.toString(),
-                newFile = arguments?.getString(PHOTO_URI) ?: "",
-                description = binding.etDescription.text.toString()
-            )
+        binding.btnRefresh.setOnClickListener {
+            postDataToVm()
         }
 
+        binding.tbAddPhoto.setOnClickListener {
+            postDataToVm()
+        }
     }
 
     private fun bindVm() {
         viewModel = ViewModelProvider(this, factory).get(AddPhotoViewModel::class.java)
+    }
+
+    private fun postDataToVm() {
+        viewModel.sendMediaFile(
+            name = binding.etPhotoName.text.toString(),
+            newFile = arguments?.getString(PHOTO_URI) ?: "",
+            description = binding.etDescription.text.toString()
+        )
     }
 
     private fun setObservers() {
@@ -64,14 +70,14 @@ class AddPhotoFragment : Fragment() {
             val isError = state is AddPhotoState.Error
             val isInit = state is AddPhotoState.FirstInit
 
+            binding.groupError.isVisible = isError
             binding.groupAddPhoto.isVisible = isInit
             binding.pbLoading.isVisible = isLoading
 
             if (isSuccess) {
-               findNavController().navigate(AddPhotoFragmentDirections.navigateAddPhotoFragmentToFeedFragment())
+                requireContext().toast(UPLOAD_PHOTO_SUCCESS)
+                findNavController().navigate(AddPhotoFragmentDirections.navigateAddPhotoFragmentToFeedFragment())
             }
-
-
         }
     }
 }

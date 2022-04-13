@@ -5,9 +5,11 @@
       <map>
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_back_button.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_calendar.xml" value="0.2955" />
+        <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_eye.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_feed.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_loader.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_mail.xml" value="0.2955" />
+        <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_profile.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_profile_avatar.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_search.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/ic_splashscreen.xml" value="0.332" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/menu_background_colors.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/menu_bottom_navigation.xml" value="0.2745" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/progress_animation.xml" value="0.2955" />
+        <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/progress_drawable.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/progressdrawable.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/round_btn.xml" value="0.2955" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/drawable/round_btn_black.xml" value="0.2955" />
@@ -30,6 +33,7 @@
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_feed.xml" value="0.33" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_home.xml" value="0.3671875" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_open_photo.xml" value="0.33" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_registration.xml" value="0.33" />
         <entry key="..\:/Users/Andrey/AndroidStudioProjects/Gallery2/app/src/main/res/layout/fragment_settings.xml" value="0.3671875" />

@@ -1,6 +1,10 @@
 import android.content.ContentResolver
+import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.text.TextUtils
+import android.util.Patterns
+import android.widget.Toast
 
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
@@ -13,4 +17,12 @@ fun ContentResolver.getFileName(fileUri: Uri): String {
     }
 
     return name
+}
+
+fun String.isValidEmail() =
+    !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+
+fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }

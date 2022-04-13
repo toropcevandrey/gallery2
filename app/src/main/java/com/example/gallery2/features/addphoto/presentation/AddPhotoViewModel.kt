@@ -16,11 +16,9 @@ class AddPhotoViewModel @Inject constructor(
     private val addPhotoRepository: AddPhotoRepository
 ) : ViewModel() {
 
-    private var body: MultipartBody.Part? = null
     private var _addPhotoLiveData: MutableLiveData<AddPhotoState> =
         MutableLiveData<AddPhotoState>(AddPhotoState.FirstInit)
     val addPhotoLiveData: LiveData<AddPhotoState> = _addPhotoLiveData
-
 
     fun sendMediaFile(name: String, newFile: String, description: String) {
 

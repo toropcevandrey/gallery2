@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/open_photo_graph"
+    app:startDestination="@id/openPhotoFragment">
+
+    <fragment
+        android:id="@+id/openPhotoFragment"
+        android:name="com.example.gallery2.features.openphoto.presentation.OpenPhotoFragment"
+        android:label="OpenPhotoFragment">
+        <argument
+            android:name="openPhoto"
+            app:argType="string"/>
+    </fragment>
+</navigation>

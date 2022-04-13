@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.gallery2.App
-import com.example.gallery2.R
 import com.example.gallery2.databinding.FragmentWelcomeBinding
 import javax.inject.Inject
 
@@ -34,8 +32,7 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-
-        initViews()
+        bindViews()
         setObservers()
         return binding.root
     }
@@ -48,20 +45,18 @@ class WelcomeFragment : Fragment() {
         viewModel.postDataToRepository()
     }
 
-    private fun initViews() {
-        binding.btnRegistration.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.navigate_welcome_to_registration,
-                null
+    private fun bindViews() {
+        binding.btnRegistration.setOnClickListener {
+            findNavController().navigate(
+                WelcomeFragmentDirections.navigateWelcomeToRegistration()
             )
-        )
+        }
 
-        binding.btnAuthorization.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.navigate_welcome_to_authorization,
-                null
+        binding.btnAuthorization.setOnClickListener {
+            findNavController().navigate(
+                WelcomeFragmentDirections.navigateWelcomeToAuthorization()
             )
-        )
+        }
     }
 
     private fun setObservers() {
@@ -70,8 +65,8 @@ class WelcomeFragment : Fragment() {
             val isLoading = state is WelcomeState.Loading
             val isError = state is WelcomeState.Error
 
-            binding.groupWelcome.isVisible = isError
-            binding.pbWelcomeLoading.isVisible = isLoading
+            binding.groupMain.isVisible = isError
+            binding.pbLoading.isVisible = isLoading
 
             if (isSuccess) {
                 findNavController().navigate(
