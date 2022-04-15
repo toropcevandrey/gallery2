@@ -28,7 +28,7 @@
         btn_refresh"
         tools:ignore="NotSibling" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,14 +83,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_tb_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@drawable/ic_settings" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_tb_back"
             android:layout_width="50dp"
             android:layout_height="56dp"

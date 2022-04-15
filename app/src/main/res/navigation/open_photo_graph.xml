@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/openPhotoFragment"
-        android:name="com.example.gallery2.features.openphoto.presentation.OpenPhotoFragment"
+        android:name="com.example.gallery2.features.openphoto.OpenPhotoFragment"
         android:label="OpenPhotoFragment">
         <argument
             android:name="openPhoto"

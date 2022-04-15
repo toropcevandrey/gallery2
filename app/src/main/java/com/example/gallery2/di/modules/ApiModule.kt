@@ -1,8 +1,8 @@
 package com.example.gallery2.di.modules
 
-import com.example.gallery2.api.services.PhotoApiService
-import com.example.gallery2.api.services.RegistrationApiService
-import com.example.gallery2.api.services.UserApiService
+import com.example.data.api.services.PhotoApiService
+import com.example.data.api.services.RegistrationApiService
+import com.example.data.api.services.UserApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

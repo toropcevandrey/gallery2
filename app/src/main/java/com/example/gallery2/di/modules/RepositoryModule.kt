@@ -1,25 +1,25 @@
 package com.example.gallery2.di.modules
 
 import android.content.Context
-import com.example.gallery2.api.services.PhotoApiService
-import com.example.gallery2.api.services.RegistrationApiService
-import com.example.gallery2.api.services.UserApiService
-import com.example.gallery2.features.addphoto.data.AddPhotoRepositoryImpl
-import com.example.gallery2.features.addphoto.domain.AddPhotoRepository
-import com.example.gallery2.features.authorization.data.AuthorizationRepositoryImpl
-import com.example.gallery2.features.authorization.domain.AuthorizationRepository
-import com.example.gallery2.features.openphoto.data.OpenPhotoRepositoryImpl
-import com.example.gallery2.features.openphoto.domain.OpenPhotoRepository
-import com.example.gallery2.features.profile.data.ProfileRepositoryImpl
-import com.example.gallery2.features.profile.domain.ProfileRepository
-import com.example.gallery2.features.registration.data.RegistrationRepositoryImpl
-import com.example.gallery2.features.registration.domain.RegistrationRepository
-import com.example.gallery2.features.settings.data.SettingsRepositoryImpl
-import com.example.gallery2.features.settings.domain.SettingsRepository
-import com.example.gallery2.features.sharedpreference.data.SharedPreferenceRepositoryImpl
-import com.example.gallery2.features.sharedpreference.domain.SharedPreferenceRepository
-import com.example.gallery2.features.tabfragment.data.TabRepositoryImpl
-import com.example.gallery2.features.tabfragment.domain.TabRepository
+import com.example.data.api.services.PhotoApiService
+import com.example.data.api.services.RegistrationApiService
+import com.example.data.api.services.UserApiService
+import com.example.data.repositories.addphoto.AddPhotoRepositoryImpl
+import com.example.domain.repositories.addphoto.AddPhotoRepository
+import com.example.data.repositories.authorization.AuthorizationRepositoryImpl
+import com.example.domain.repositories.authorization.AuthorizationRepository
+import com.example.data.repositories.openphoto.OpenPhotoRepositoryImpl
+import com.example.domain.repositories.openphoto.OpenPhotoRepository
+import com.example.data.repositories.profile.ProfileRepositoryImpl
+import com.example.domain.repositories.profile.ProfileRepository
+import com.example.data.repositories.registration.RegistrationRepositoryImpl
+import com.example.domain.repositories.registration.RegistrationRepository
+import com.example.data.repositories.settings.SettingsRepositoryImpl
+import com.example.domain.repositories.settings.SettingsRepository
+import com.example.data.repositories.sharedpreference.SharedPreferenceRepositoryImpl
+import com.example.domain.repositories.sharedpreference.SharedPreferenceRepository
+import com.example.data.repositories.tabfragment.PhotoRepositoryImpl
+import com.example.domain.repositories.tabfragment.PhotoRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -39,8 +39,9 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTabRepository(photoApiService: PhotoApiService): TabRepository =
-        TabRepositoryImpl(photoApiService)
+    fun provideTabRepository(photoApiService: PhotoApiService): PhotoRepository =
+        PhotoRepositoryImpl(photoApiService)
+
     @Provides
     @Singleton
     fun provideOpenPhoto(

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.gallery2.features.feed.presentation.FeedFragment"
+        android:name="com.example.gallery2.features.feed.FeedFragment"
         android:label="FeedFragment" >
         <action
             android:id="@+id/navigate_feedFragment_to_bottomFragment"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/addPhotoFragment"
-        android:name="com.example.gallery2.features.addphoto.presentation.AddPhotoFragment"
+        android:name="com.example.gallery2.features.addphoto.AddPhotoFragment"
         android:label="AddPhotoFragment" >
         <action
             android:id="@+id/navigate_addPhotoFragment_to_feedFragment"

@@ -5,6 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gallery2.R
 
+/***
+ * По всему проекту желательно уйти от lateinit и использовать by lazy +++
+ * Можно базовые вещи (к примеру, инициализация биндинга) вынести в BaseFragment +++
+ * Можно смело выпиливать tokenTime +++
+ * */
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +20,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun signOut() {
-        val i = applicationContext.packageManager
-            .getLaunchIntentForPackage(applicationContext.packageName)
-        i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(i)
+        packageManager.getLaunchIntentForPackage(packageName)?.apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }?.let {
+            startActivity(it)
+        }
     }
 }

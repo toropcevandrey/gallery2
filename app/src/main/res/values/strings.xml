@@ -43,4 +43,5 @@
     <string name="_20_20_2000">20.20.2000</string>
     <string name="connection_error">Connection error,\n please try again</string>
     <string name="refresh">Refresh</string>
+    <string name="add_photo">Add photo</string>
 </resources>

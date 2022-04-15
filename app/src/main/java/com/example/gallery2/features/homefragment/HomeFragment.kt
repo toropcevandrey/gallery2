@@ -11,45 +11,53 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.gallery2.R
+import com.example.gallery2.base.BaseFragment
+import com.example.gallery2.base.BaseViewModel
 import com.example.gallery2.databinding.FragmentHomeBinding
-import com.example.gallery2.features.feed.presentation.SharedViewModel
+import com.example.gallery2.features.feed.SharedViewModel
 import com.example.gallery2.utils.Constants.BACK_PRESSED
 import toast
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private var backPressed: Long = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater)
-        setObservers()
-        closeApp()
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val navHostFragment =
-            childFragmentManager.findFragmentById(R.id.home_fragment_nav_host_fragment) as NavHostFragment
+        setObservers()
+        closeApp()
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.home_fragment_nav_host_fragment)
+                as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
     }
 
-    private fun closeApp() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun closeApp() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (backPressed + 2000 > System.currentTimeMillis()) requireActivity().finish()
-            else requireContext().toast(BACK_PRESSED)
+            if (backPressed + 2000 > System.currentTimeMillis()) {
+                requireActivity().finish()
+            } else {
+                requireContext().toast(BACK_PRESSED)
+            }
             backPressed = System.currentTimeMillis()
         }
     }
-
 
     private fun setObservers() {
         sharedViewModel.observeOpenPhoto().observe(viewLifecycleOwner) {
@@ -58,15 +66,10 @@ class HomeFragment : Fragment() {
             )
         }
 
-        sharedViewModel.observeOpenSettings().observe(viewLifecycleOwner){
+        sharedViewModel.observeOpenSettings().observe(viewLifecycleOwner) {
             findNavController().navigate(
                 HomeFragmentDirections.navigateHomeFragmentToSettingsFragment()
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

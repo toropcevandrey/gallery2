@@ -27,7 +27,7 @@
         btn_refresh"
         tools:ignore="NotSibling" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_tb_back"
             android:layout_width="50dp"
             android:layout_height="56dp"
@@ -101,7 +101,7 @@
         android:background="@color/black"
         app:layout_constraintTop_toBottomOf="@id/tb_open_photo" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -123,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_photo"
         tools:text="Name" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_eye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

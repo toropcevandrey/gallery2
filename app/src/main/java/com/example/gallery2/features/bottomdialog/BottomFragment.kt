@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.navigation.fragment.findNavController
@@ -26,8 +25,8 @@ import java.io.FileOutputStream
 class BottomFragment : BottomSheetDialogFragment() {
 
     private val requestCameraPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {isGranted ->
-            if (isGranted){
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
                 createImageFile().let { tempFile ->
                     FileProvider.getUriForFile(
                         requireContext(), "${BuildConfig.APPLICATION_ID}${".provider"}", tempFile
@@ -41,8 +40,8 @@ class BottomFragment : BottomSheetDialogFragment() {
         }
 
     private val requestStoragePermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {isGranted ->
-            if (isGranted){
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
                 getGalleryImage.launch("image/*")
             } else {
                 requireContext().toast(TOAST_PERMISSION_STORAGE)
@@ -91,10 +90,14 @@ class BottomFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBottomDialogBinding.inflate(inflater, container, false)
-        initViews()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
     }
 
     private fun createImageFile(): File {

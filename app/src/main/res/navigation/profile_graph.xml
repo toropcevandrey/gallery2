@@ -5,7 +5,7 @@
     app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.gallery2.features.profile.presentation.ProfileFragment"
+        android:name="com.example.gallery2.features.profile.ProfileFragment"
         android:label="ProfileFragment">
         <action
             android:id="@+id/navigate_profileFragment_to_settingsFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.gallery2.features.settings.presentation.SettingsFragment"
+        android:name="com.example.gallery2.features.settings.SettingsFragment"
         android:label="SettingsFragment" />
     <include app:graph="@navigation/feed_graph" />
 </navigation>

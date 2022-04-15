@@ -4,7 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.gallery2.BuildConfig
-import com.example.gallery2.api.interceptors.authenticator.AccessTokenInterceptor
+import com.example.gallery2.network.AccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

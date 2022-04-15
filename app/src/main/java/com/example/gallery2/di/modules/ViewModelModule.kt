@@ -4,14 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.gallery2.base.ViewModelFactory
 import com.example.gallery2.di.ViewModelKey
-import com.example.gallery2.features.addphoto.presentation.AddPhotoViewModel
-import com.example.gallery2.features.authorization.presentation.AuthorizationViewModel
-import com.example.gallery2.features.openphoto.presentation.OpenPhotoViewModel
-import com.example.gallery2.features.profile.presentation.ProfileViewModel
-import com.example.gallery2.features.registration.presentation.RegistrationViewModel
-import com.example.gallery2.features.settings.presentation.SettingsViewModel
-import com.example.gallery2.features.tabfragment.presentation.TabViewModel
-import com.example.gallery2.features.welcome.presentation.WelcomeViewModel
+import com.example.gallery2.features.addphoto.AddPhotoViewModel
+import com.example.gallery2.features.authorization.AuthorizationViewModel
+import com.example.gallery2.features.openphoto.OpenPhotoViewModel
+import com.example.gallery2.features.profile.ProfileViewModel
+import com.example.gallery2.features.registration.RegistrationViewModel
+import com.example.gallery2.features.settings.SettingsViewModel
+import com.example.gallery2.features.tabfragment.new_tab.NewTabViewModel
+import com.example.gallery2.features.tabfragment.popular_tab.PopularTabViewModel
+import com.example.gallery2.features.welcome.WelcomeViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -42,13 +43,18 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(TabViewModel::class)
-    abstract fun bindTabViewModel(tabViewModel: TabViewModel): ViewModel
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(ProfileViewModel::class)
-    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
+    @ViewModelKey(NewTabViewModel::class)
+    abstract fun bindNewTabViewModel(newTabViewModel: NewTabViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PopularTabViewModel::class)
+    abstract fun bindPopularTabViewModel(popularTabViewModel: PopularTabViewModel): ViewModel
 
     @Binds
     @IntoMap
