@@ -10,6 +10,7 @@ import com.example.gallery2.base.BaseFragment
 import com.example.gallery2.base.ValidateState
 import com.example.gallery2.databinding.FragmentSettingsBinding
 import com.example.gallery2.features.mainactivity.MainActivity
+import com.example.gallery2.features.profile.ProfileFragmentDirections
 import com.example.gallery2.utils.Constants.TOAST_USER_DIFFERENT_PASSWORDS
 import com.example.gallery2.utils.Constants.TOAST_USER_INFO_UPDATED
 import com.example.gallery2.utils.Constants.TOAST_USER_NOT_VALID_EMAIL
@@ -43,30 +44,30 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private fun initViews() {
         with(binding) {
-            ivTbBack.setOnClickListener {
+            ivSettingsTbBack.setOnClickListener {
                 findNavController().navigateUp()
             }
 
-            tvSave.setOnClickListener {
+            tvSettingsSave.setOnClickListener {
                 viewModel.validateData(
-                    name = etName.text.toString(),
-                    email = etEmail.text.toString(),
-                    phone = etPhone.text.toString(),
-                    oldPassword = etOldPassword.text.toString(),
-                    newPassword = etNewPassword.text.toString(),
-                    confirmPassword = etConfirmPassword.text.toString()
+                    name = etSettingsName.text.toString(),
+                    email = etSettingsEmail.text.toString(),
+                    phone = etSettingsPhone.text.toString(),
+                    oldPassword = etSettingsOldPassword.text.toString(),
+                    newPassword = etSettingsNewSettingsPassword.text.toString(),
+                    confirmPassword = etSettingsConfirmPassword.text.toString()
                 )
             }
 
-            btnRefresh.setOnClickListener {
+            btnSettingsRefresh.setOnClickListener {
                 viewModel.getUserInfo()
             }
 
-            tvDeleteYourAccount.setOnClickListener {
+            tvSettingsDeleteYourAccount.setOnClickListener {
                 viewModel.deleteUser()
             }
 
-            tvSignOut.setOnClickListener {
+            tvSettingsSignOut.setOnClickListener {
                 viewModel.unAuthorization()
                 (requireActivity() as MainActivity).signOut()
             }
@@ -79,15 +80,15 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             val isError = state is SettingsState.Error
             val isLoading = state is SettingsState.Loading
 
-            binding.pbLoading.isVisible = isLoading
-            binding.groupMain.isVisible = isSuccess
-            binding.groupError.isVisible = isError
+            binding.pbSettingsLoading.isVisible = isLoading
+            binding.groupSettingsMain.isVisible = isSuccess
+            binding.groupSettingsError.isVisible = isError
 
             if (isSuccess) {
                 val data = ((state as SettingsState.Success).settingsViewData)
-                binding.etName.setText(data.username)
-                binding.etPhone.setText(data.phone)
-                binding.etEmail.setText(data.email)
+                binding.etSettingsName.setText(data.username)
+                binding.etSettingsPhone.setText(data.phone)
+                binding.etSettingsEmail.setText(data.email)
             }
         }
 
@@ -100,7 +101,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             val isEmpty = state is ValidateState.IsEmpty
 
             when {
-                isSuccess -> requireContext().toast(TOAST_USER_INFO_UPDATED)
+                isSuccess -> {
+                    requireContext().toast(TOAST_USER_INFO_UPDATED)
+                    findNavController().navigateUp()
+                }
                 isComparePassword -> requireContext().toast(TOAST_USER_DIFFERENT_PASSWORDS)
                 isWrongEmail -> requireContext().toast(TOAST_USER_NOT_VALID_EMAIL)
                 isWrongOldPassword -> requireContext().toast(TOAST_USER_WRONG_OLD_PASSWORD)

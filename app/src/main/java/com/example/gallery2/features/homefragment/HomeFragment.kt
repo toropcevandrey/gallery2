@@ -11,8 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.gallery2.R
-import com.example.gallery2.base.BaseFragment
-import com.example.gallery2.base.BaseViewModel
 import com.example.gallery2.databinding.FragmentHomeBinding
 import com.example.gallery2.features.feed.SharedViewModel
 import com.example.gallery2.utils.Constants.BACK_PRESSED
@@ -29,9 +27,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
         closeApp()
-        val navHostFragment = childFragmentManager.findFragmentById(R.id.home_fragment_nav_host_fragment)
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.homeFragmentNavHostFragment)
                 as NavHostFragment
-        binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
+        binding.bottomNavigationHome.setupWithNavController(navHostFragment.navController)
     }
 
     override fun onCreateView(

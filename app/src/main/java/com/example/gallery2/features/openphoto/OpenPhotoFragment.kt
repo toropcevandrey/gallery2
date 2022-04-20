@@ -51,7 +51,7 @@ class OpenPhotoFragment : BaseFragment<FragmentOpenPhotoBinding>() {
     override fun getViewBinding(): FragmentOpenPhotoBinding = FragmentOpenPhotoBinding.inflate(layoutInflater)
 
     private fun initViews() {
-        binding.ivTbBack.setOnClickListener {
+        binding.ivOpenPhotoTbBack.setOnClickListener {
             findNavController().navigateUp()
         }
     }
@@ -62,19 +62,19 @@ class OpenPhotoFragment : BaseFragment<FragmentOpenPhotoBinding>() {
             val isError = state is OpenPhotoState.Error
             val isLoading = state is OpenPhotoState.Loading
 
-            binding.pbLoading.isVisible = isLoading
-            binding.groupMain.isVisible = isSuccess
-            binding.groupError.isVisible = isError
+            binding.pbOpenPhotoLoading.isVisible = isLoading
+            binding.groupOpenPhotoMain.isVisible = isSuccess
+            binding.groupOpenPhotoError.isVisible = isError
 
             if (isSuccess) {
-                binding.tvPhotoName.text = (state as OpenPhotoState.Success).openPhotoViewData.name
-                binding.tvUserName.text = state.userName
-                binding.tvDescription.text = state.openPhotoViewData.description
+                binding.tvOpenPhotoPhotoName.text = (state as OpenPhotoState.Success).openPhotoViewData.name
+                binding.tvOpenPhotoUserName.text = state.userName
+                binding.tvOpenPhotoDescription.text = state.openPhotoViewData.description
                 Glide.with(this)
                     .load(BASE_URL_MEDIA + state.openPhotoViewData.image)
                     .placeholder(circularProgressDrawable)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.ivPhoto)
+                    .into(binding.ivOpenPhotoImage)
             }
         }
     }

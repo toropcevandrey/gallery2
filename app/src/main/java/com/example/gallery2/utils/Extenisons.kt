@@ -1,6 +1,8 @@
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.util.Patterns
@@ -24,5 +26,7 @@ fun String.isValidEmail() =
 
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, message, duration).show()
+    Handler(Looper.getMainLooper()).postDelayed(Runnable {
+        Toast.makeText(this, message, duration).show()
+    }, 2000)
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,6 +14,7 @@ import com.example.gallery2.base.BaseFragment
 import com.example.gallery2.features.feed.SharedViewModel
 import com.example.gallery2.features.tabfragment.TabState
 import com.example.gallery2.features.tabfragment.adapter.TabListAdapter
+
 
 abstract class BaseTabFragment<VB : ViewBinding> : BaseFragment<VB>(), TabListAdapter.OnPhotoClickListener {
 
@@ -27,6 +27,7 @@ abstract class BaseTabFragment<VB : ViewBinding> : BaseFragment<VB>(), TabListAd
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val listAdapter: TabListAdapter by lazy { TabListAdapter(this) }
+    private var gLayoutManager: GridLayoutManager? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,9 +37,10 @@ abstract class BaseTabFragment<VB : ViewBinding> : BaseFragment<VB>(), TabListAd
     }
 
     private fun initViews() {
+        gLayoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = listAdapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        swipeRefreshLayout.setOnRefreshListener {
+        recyclerView.layoutManager = gLayoutManager
+        swipeRefreshLayout.setOnRefreshListener() {
             viewModel.refreshData()
         }
     }
@@ -72,17 +74,38 @@ abstract class BaseTabFragment<VB : ViewBinding> : BaseFragment<VB>(), TabListAd
 
     private fun rvAddOnScrollListener() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            var isLoaded = false
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN) && recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE
-                    && !isLoaded
-                ) {
-                    isLoaded = true
-                    viewModel.loadNextPage()
+            var previousTotal = 0
+            val visibleThreshold = 5
+            var loading = true
+            var firstVisibleItem = 0
+            var visibleItemCount = 0
+            var totalItemCount = 0
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    visibleItemCount = gLayoutManager?.childCount!!
+                    totalItemCount = gLayoutManager?.itemCount!!
+                    firstVisibleItem = gLayoutManager?.findFirstVisibleItemPosition()!!
+                    if (loading) {
+                        if (totalItemCount > previousTotal) {
+                            loading = false;
+                            previousTotal = totalItemCount;
+                        }
+                    }
+                    if (!loading && (totalItemCount - visibleItemCount)
+                        <= (firstVisibleItem + visibleThreshold)
+                    ) {
+                        viewModel.loadNextPage()
+                        loading = true;
+                    }
                 }
-                isLoaded = false
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (gLayoutManager != null) {
+            gLayoutManager = null
+        }
     }
 }

@@ -8,26 +8,26 @@
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_main"
+        android:id="@+id/groupAuthorizationMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        app:constraint_referenced_ids="tb_authorization,
-        tv_authorization,
-        tv_forgot_login_password,
-        et_email,
-        cv_card,
-        et_password,
-        btn_registration,
-        btn_authorization,
-        til_email,
-        til_password,
-        line_two,
-        line_one"
+        app:constraint_referenced_ids="tbAuthorization,
+        tvAuthorization,
+        tvAuthorizationForgotLoginPassword,
+        etAuthorizationEmail,
+        cvAuthorizationCard,
+        etAuthorizationPassword,
+        btnAuthorizationRegistration,
+        btnAuthorizationAuthorization,
+        tilAuthorizationEmail,
+        tilAuthorizationPassword,
+        lineAuthorizationTwo,
+        lineAuthorizationOne"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_authorization"
+        android:id="@+id/tbAuthorization"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -37,23 +37,24 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivAuthorizationTbBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:fontFamily="@font/roboto_regular"
             android:text="@string/cancel"
             android:textSize="17sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line_two"
+        android:id="@+id/lineAuthorizationTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/tb_authorization" />
+        app:layout_constraintTop_toBottomOf="@+id/tbAuthorization" />
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbAuthorizationLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -64,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_card"
+        android:id="@+id/cvAuthorizationCard"
         android:layout_width="97dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -72,18 +73,19 @@
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_authorization">
+        app:layout_constraintTop_toBottomOf="@id/tbAuthorization">
 
         <TextView
-            android:id="@+id/tv_authorization"
+            android:id="@+id/tvAuthorization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/sign_in"
             android:textColor="@color/black"
             android:textSize="30sp" />
 
         <View
-            android:id="@+id/line_one"
+            android:id="@+id/lineAuthorizationOne"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
@@ -92,7 +94,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email"
+        android:id="@+id/tilAuthorizationEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,20 +107,22 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_card">
+        app:layout_constraintTop_toBottomOf="@id/cvAuthorizationCard">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_email"
+            android:id="@+id/etAuthorizationEmail"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_mail"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_password"
+        android:id="@+id/tilAuthorizationPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,44 +134,48 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_email"
+        app:layout_constraintTop_toBottomOf="@id/tilAuthorizationEmail"
         app:passwordToggleContentDescription="description"
         app:passwordToggleEnabled="true"
         app:placeholderTextColor="@color/black">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etAuthorizationPassword"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_forgot_login_password"
+        android:id="@+id/tvAuthorizationForgotLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/forgot_login_password"
-        app:layout_constraintEnd_toEndOf="@id/til_password"
-        app:layout_constraintTop_toBottomOf="@id/til_password" />
+        app:layout_constraintEnd_toEndOf="@id/tilAuthorizationPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilAuthorizationPassword" />
 
     <Button
-        android:id="@+id/btn_authorization"
+        android:id="@+id/btnAuthorization"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/round_btn_black"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthorizationForgotLoginPassword" />
 
     <TextView
-        android:id="@+id/btn_registration"
+        android:id="@+id/btnAuthorizationRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -176,5 +184,5 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_authorization" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAuthorization" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,13 +41,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ProfileAdapter.O
     private fun initViews() {
         binding.rvProfile.adapter = adapter
         binding.rvProfile.layoutManager = GridLayoutManager(binding.root.context, 4)
-        binding.ivTbSettings.setOnClickListener {
+        binding.ivProfileTbSettings.setOnClickListener {
             sharedViewModel.openSettings()
         }
-        binding.ivTbBack.setOnClickListener {
+        binding.ivProfileTbBack.setOnClickListener {
             findNavController().navigateUp()
         }
-        binding.btnRefresh.setOnClickListener {
+        binding.btnProfileRefresh.setOnClickListener {
             viewModel.loadProfile()
         }
     }
@@ -62,13 +62,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ProfileAdapter.O
             val isError = state is ProfileState.Error
             val isLoading = state is ProfileState.Loading
 
-            binding.pbLoading.isVisible = isLoading
-            binding.groupMain.isVisible = isSuccess
-            binding.groupError.isVisible = isError
+            binding.pbProfileLoading.isVisible = isLoading
+            binding.groupProfileMain.isVisible = isSuccess
+            binding.groupProfileError.isVisible = isError
 
             if (isSuccess) {
-                binding.tvName.text = ((state as ProfileState.Success).name)
-                binding.tvPhone.text = (state.phone)
+                binding.tvProfileName.text = ((state as ProfileState.Success).name)
+                binding.tvProfilePhone.text = (state.phone)
                 adapter.submitList(state.profile)
             }
         }

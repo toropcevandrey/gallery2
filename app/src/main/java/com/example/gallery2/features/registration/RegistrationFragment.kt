@@ -40,23 +40,23 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
     }
 
     private fun initViews() {
-        binding.btnAuthorization.setOnClickListener {
+        binding.btnRegistrationAuthorization.setOnClickListener {
             findNavController().navigate(
                 RegistrationFragmentDirections.navigateRegistrationToAuthorization()
             )
         }
 
-        binding.ivTbBack.setOnClickListener {
+        binding.ivRegistrationTbBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        binding.btnRegistration.setOnClickListener {
+        binding.btnRegistrationRegistration.setOnClickListener {
             viewModel.validateData(
-                name = binding.etUserName.text.toString(),
-                phone = binding.etPhone.text.toString(),
-                email = binding.etEmail.text.toString(),
-                password = binding.etPassword.text.toString(),
-                confirmPassword = binding.etConfirmPassword.text.toString()
+                name = binding.etRegistrationUserName.text.toString(),
+                phone = binding.etRegistrationPhone.text.toString(),
+                email = binding.etRegistrationEmail.text.toString(),
+                password = binding.etRegistrationPassword.text.toString(),
+                confirmPassword = binding.etRegistrationConfirmPassword.text.toString()
             )
         }
     }
@@ -67,8 +67,8 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>() {
             val isSuccess = state is RegistrationState.Success
             val isLoading = state is RegistrationState.Loading
 
-            binding.groupMain.isVisible = !isLoading && !isSuccess
-            binding.pbLoading.isVisible = isLoading
+            binding.groupRegistrationMain.isVisible = !isLoading && !isSuccess
+            binding.pbRegistrationLoading.isVisible = isLoading
 
             if (isSuccess) {
                 findNavController().navigate(

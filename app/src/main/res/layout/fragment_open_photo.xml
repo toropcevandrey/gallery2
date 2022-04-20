@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbOpenPhotoLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -17,18 +17,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_error"
+        android:id="@+id/groupOpenPhotoError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         app:constraint_referenced_ids="
-        iv_error,
-        tv_error,
-        btn_refresh"
+        ivOpenPhotoError,
+        tvOpenPhotoError,
+        btnOpenPhotoRefresh"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_error"
+        android:id="@+id/ivOpenPhotoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_error"
+        android:id="@+id/tvOpenPhotoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -46,38 +46,38 @@
         android:textColor="@color/main_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/ivOpenPhotoError" />
 
     <Button
-        android:id="@+id/btn_refresh"
+        android:id="@+id/btnOpenPhotoRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="@drawable/round_btn_black"
-        android:fontFamily="@font/roboto"
         android:text="@string/refresh"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOpenPhotoError" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_main"
+        android:id="@+id/groupOpenPhotoMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:constraint_referenced_ids="tb_open_photo,
-        iv_photo,
-        iv_eye,
-        tv_user_name,
-        tv_photo_name,
-        tv_date_create,
-        tv_description,
-        tv_views,
-        line_one" />
+        app:constraint_referenced_ids="tbOpenPhoto,
+        ivOpenPhotoImage,
+        ivOpenPhotoEye,
+        tvOpenPhotoUserName,
+        tvOpenPhotoPhotoName,
+        tvOpenPhotoDateCreate,
+        tvOpenPhotoDescription,
+        tvOpenPhotoViews,
+        lineSettingsOne"
+        tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_open_photo"
+        android:id="@+id/tbOpenPhoto"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -87,7 +87,7 @@
         tools:ignore="RtlSymmetry">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivOpenPhotoTbBack"
             android:layout_width="50dp"
             android:layout_height="56dp"
             android:layout_gravity="start"
@@ -95,88 +95,93 @@
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line_one"
+        android:id="@+id/lineOpenPhotoOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tb_open_photo" />
+        app:layout_constraintTop_toBottomOf="@id/tbOpenPhoto" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_photo"
+        android:id="@+id/ivOpenPhotoImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_open_photo"
+        app:layout_constraintTop_toBottomOf="@id/tbOpenPhoto"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/tv_photo_name"
+        android:id="@+id/tvOpenPhotoPhotoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_photo"
+        app:layout_constraintTop_toBottomOf="@id/ivOpenPhotoImage"
         tools:text="Name" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_eye"
+        android:id="@+id/ivOpenPhotoEye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_eye"
-        app:layout_constraintBottom_toBottomOf="@id/tv_photo_name"
+        app:layout_constraintBottom_toBottomOf="@id/tvOpenPhotoPhotoName"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tv_views"
+        android:id="@+id/tvOpenPhotoViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="4dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/_228"
         android:textColor="@color/main_gray"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_photo_name"
-        app:layout_constraintEnd_toStartOf="@id/iv_eye"
-        app:layout_constraintTop_toTopOf="@id/tv_photo_name"
+        app:layout_constraintBottom_toBottomOf="@id/tvOpenPhotoPhotoName"
+        app:layout_constraintEnd_toStartOf="@id/ivOpenPhotoEye"
+        app:layout_constraintTop_toTopOf="@id/tvOpenPhotoPhotoName"
         tools:ignore="SmallSp" />
 
     <TextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/tvOpenPhotoUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/user_name_settings"
         android:textColor="@color/main_gray"
-        app:layout_constraintStart_toStartOf="@id/tv_photo_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_photo_name" />
+        app:layout_constraintStart_toStartOf="@id/tvOpenPhotoPhotoName"
+        app:layout_constraintTop_toBottomOf="@id/tvOpenPhotoPhotoName" />
 
     <TextView
-        android:id="@+id/tv_date_create"
+        android:id="@+id/tvOpenPhotoDateCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/_20_20_2000"
         android:textColor="@color/main_gray"
-        app:layout_constraintBottom_toBottomOf="@id/tv_user_name"
+        app:layout_constraintBottom_toBottomOf="@id/tvOpenPhotoUserName"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tv_description"
+        android:id="@+id/tvOpenPhotoDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto_light"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        app:layout_constraintTop_toBottomOf="@id/tvOpenPhotoUserName"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

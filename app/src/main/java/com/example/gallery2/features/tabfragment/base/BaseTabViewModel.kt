@@ -3,13 +3,13 @@ package com.example.gallery2.features.tabfragment.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.domain.models.photo.PhotoCollectionModel
-import com.example.domain.repositories.tabfragment.PhotoRepository
 import com.example.gallery2.base.BaseViewModel
 import com.example.gallery2.features.tabfragment.TabState
 import com.example.gallery2.features.tabfragment.TabViewData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.HttpException
 
 abstract class BaseTabViewModel : BaseViewModel() {
 
@@ -26,6 +26,7 @@ abstract class BaseTabViewModel : BaseViewModel() {
 
     fun refreshData() {
         photoList.clear()
+        searchList.clear()
         loadFirstPage()
     }
 
@@ -56,15 +57,14 @@ abstract class BaseTabViewModel : BaseViewModel() {
     }
 
     fun onSearchEntered(query: String) {
+        this.query = query
         if (isSearching) return
         if (query.length > 2) {
-            page = 1
+            page = FIRST_PAGE
             getPhotosBySearch(query = query, page = page)
                 .doOnSubscribe {
                     _tabLiveData.postValue(TabState.LoadingCenter)
                     searchList.clear()
-
-
                     isSearching = true
                 }
                 .subscribeOn(Schedulers.io())
@@ -86,20 +86,29 @@ abstract class BaseTabViewModel : BaseViewModel() {
     }
 
     protected fun loadFirstPage() {
-        getPhotos(page = page)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { _tabLiveData.value = TabState.LoadingCenter }
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { page++ }
-            .subscribe({
-                photoList.addAll(it.data.map { data ->
-                    TabViewData(id = data.id, image = data.image.name)
+        if (query.length > 2) {
+            onSearchEntered(query)
+        } else {
+            getPhotos(page = FIRST_PAGE)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe { _tabLiveData.value = TabState.LoadingCenter }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess { page++ }
+                .retry(3)
+                .subscribe({
+                    photoList.addAll(it.data.map { data ->
+                        TabViewData(id = data.id, image = data.image.name)
+                    })
+                    _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
+                }, {
+                    it.printStackTrace()
+                    _tabLiveData.value = TabState.Error
                 })
-                _tabLiveData.value = TabState.Success(photoList.map { it.copy() })
-            }, {
-                it.printStackTrace()
-                _tabLiveData.value = TabState.Error
-            })
-            .let(compositeDisposable::add)
+                .let(compositeDisposable::add)
+        }
+    }
+
+    private companion object {
+        const val FIRST_PAGE = 1
     }
 }

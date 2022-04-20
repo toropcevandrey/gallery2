@@ -37,13 +37,13 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     }
 
     private fun bindViews() {
-        binding.btnRegistration.setOnClickListener {
+        binding.btnWelcomeRegistration.setOnClickListener {
             findNavController().navigate(
                 WelcomeFragmentDirections.navigateWelcomeToRegistration()
             )
         }
 
-        binding.btnAuthorization.setOnClickListener {
+        binding.btnWelcomeAuthorization.setOnClickListener {
             findNavController().navigate(
                 WelcomeFragmentDirections.navigateWelcomeToAuthorization()
             )
@@ -54,12 +54,12 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
         viewModel.welcomeEvents.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is WelcomeEvents.OpenMainScreen -> {
-                    binding.groupMain.isVisible = false
+                    binding.groupWelcomeMain.isVisible = false
                     findNavController().navigate(
                         WelcomeFragmentDirections.navigateWelcomeFragmentToHomeFragment()
                     )
                 }
-                is WelcomeEvents.OpenAuthScreen -> binding.groupMain.isVisible = true
+                is WelcomeEvents.OpenAuthScreen -> binding.groupWelcomeMain.isVisible = true
             }
         }
     }

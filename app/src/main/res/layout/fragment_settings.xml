@@ -9,7 +9,7 @@
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbSettingsLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -20,18 +20,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_error"
+        android:id="@+id/groupSettingsError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         app:constraint_referenced_ids="
-        iv_error,
-        tv_error,
-        btn_refresh"
+        ivSettingsError,
+        tvSettingsError,
+        btnSettingsRefresh"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_error"
+        android:id="@+id/ivSettingsError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_error"
+        android:id="@+id/tvSettingsError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -49,34 +49,33 @@
         android:textColor="@color/main_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/ivSettingsError" />
 
     <Button
-        android:id="@+id/btn_refresh"
+        android:id="@+id/btnSettingsRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="@drawable/round_btn_black"
-        android:fontFamily="@font/roboto"
         android:text="@string/refresh"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingsError" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_main"
+        android:id="@+id/groupSettingsMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="
-        tb_settings,
-        sv_main,
-        line_one"
+        tbSettings,
+        svSettingsMain,
+        lineSettingsOne"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_settings"
+        android:id="@+id/tbSettings"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -86,8 +85,9 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:id="@+id/tv_save"
+            android:id="@+id/tvSettingsSave"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:layout_height="40dp"
             android:layout_gravity="end"
             android:layout_marginTop="15dp"
@@ -96,7 +96,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivSettingsTbBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -105,18 +105,18 @@
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line_one"
+        android:id="@+id/lineSettingsOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/tb_settings" />
+        app:layout_constraintTop_toBottomOf="@+id/tbSettings" />
 
     <ScrollView
-        android:id="@+id/sv_main"
+        android:id="@+id/svSettingsMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_settings"
+        app:layout_constraintTop_toBottomOf="@id/tbSettings"
         tools:ignore="NotSibling">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,17 +125,17 @@
             android:layout_marginTop="21dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_avatar"
+                android:id="@+id/ivSettingsAvatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/ic_profile_avatar"
                 app:civ_border_color="@color/gray_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line_one" />
+                app:layout_constraintTop_toBottomOf="@+id/lineSettingsOne" />
 
             <TextView
-                android:id="@+id/tv_upload_photo"
+                android:id="@+id/tvSettingsUploadPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -143,10 +143,10 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
+                app:layout_constraintTop_toBottomOf="@id/ivSettingsAvatar" />
 
             <TextView
-                android:id="@+id/tv_personal_data"
+                android:id="@+id/tvSettingsPersonalData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -154,10 +154,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_upload_photo" />
+                app:layout_constraintTop_toBottomOf="@+id/tvSettingsUploadPhoto" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_name"
+                android:id="@+id/tilSettingsName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,10 +169,11 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_personal_data">
+                app:layout_constraintTop_toBottomOf="@id/tvSettingsPersonalData">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_name"
+                    android:id="@+id/etSettingsName"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_user_name"
@@ -182,7 +183,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_phone"
+                android:id="@+id/tilSettingsPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -194,10 +195,11 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_name">
+                app:layout_constraintTop_toBottomOf="@+id/tilSettingsName">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_phone"
+                    android:id="@+id/etSettingsPhone"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_phone"
@@ -207,7 +209,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_email"
+                android:id="@+id/tilSettingsEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,10 +221,11 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_phone">
+                app:layout_constraintTop_toBottomOf="@+id/tilSettingsPhone">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/etSettingsEmail"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_mail"
@@ -232,7 +235,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_password"
+                android:id="@+id/tvSettingsPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -241,10 +244,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_email" />
+                app:layout_constraintTop_toBottomOf="@+id/tilSettingsEmail" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_old_password"
+                android:id="@+id/tilSettingsOldPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -256,12 +259,13 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_password"
+                app:layout_constraintTop_toBottomOf="@+id/tvSettingsPassword"
                 app:passwordToggleContentDescription="description"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_old_password"
+                    android:id="@+id/etSettingsOldPassword"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -270,7 +274,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_new_password"
+                android:id="@+id/tilSettingsNewPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -282,12 +286,13 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_old_password"
+                app:layout_constraintTop_toBottomOf="@+id/tilSettingsOldPassword"
                 app:passwordToggleContentDescription="description"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_new_password"
+                    android:id="@+id/etSettingsNewSettingsPassword"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -296,7 +301,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_confirm_password"
+                android:id="@+id/tilSettingsConfirmPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -308,12 +313,13 @@
                 app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_new_password"
+                app:layout_constraintTop_toBottomOf="@+id/tilSettingsNewPassword"
                 app:passwordToggleContentDescription="description"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_confirm_password"
+                    android:id="@+id/etSettingsConfirmPassword"
+                    style="@style/customEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -322,7 +328,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/tv_you_can"
+                android:id="@+id/tvSettingsYouCan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -331,28 +337,28 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_confirm_password" />
+                app:layout_constraintTop_toBottomOf="@id/tilSettingsConfirmPassword" />
 
             <TextView
-                android:id="@+id/tv_delete_your_account"
+                android:id="@+id/tvSettingsDeleteYourAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delete_your_account"
                 android:textColor="@color/purple"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/tv_you_can"
-                app:layout_constraintStart_toEndOf="@+id/tv_you_can" />
+                app:layout_constraintBottom_toBottomOf="@id/tvSettingsYouCan"
+                app:layout_constraintStart_toEndOf="@+id/tvSettingsYouCan" />
 
             <TextView
-                android:id="@+id/tv_sign_out"
+                android:id="@+id/tvSettingsSignOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/sign_out"
                 android:textColor="@color/purple"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_you_can"
-                app:layout_constraintTop_toBottomOf="@id/tv_you_can" />
+                app:layout_constraintStart_toStartOf="@id/tvSettingsYouCan"
+                app:layout_constraintTop_toBottomOf="@id/tvSettingsYouCan" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -10,13 +10,9 @@
         <action
             android:id="@+id/navigate_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/navigate_profileFragment_to_feed_graph"
-            app:destination="@id/feed_graph" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.gallery2.features.settings.SettingsFragment"
         android:label="SettingsFragment" />
-    <include app:graph="@navigation/feed_graph" />
 </navigation>

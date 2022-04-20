@@ -8,7 +8,7 @@
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbRegistrationLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -19,30 +19,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_main"
+        android:id="@+id/groupRegistrationMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:constraint_referenced_ids="tv_registration,
-        cv_card,
-        et_confirm_password,
-        et_email,
-        et_password,
-        et_confirm_password,
-        et_phone,
-        et_search,
-        tb_registration,
-        btn_authorization,
-        btn_registration,
-        til_password,
-        til_confirm_password,
-        til_email,
-        line_two,
-        til_phone,
-        til_user_name"
+        app:constraint_referenced_ids="tvRegistration,
+        cvRegistrationCard,
+        etRegistrationConfirmPassword,
+        etRegistrationEmail,
+        etRegistrationPassword,
+        etRegistrationPhone,
+        tbRegistration,
+        btnRegistrationAuthorization,
+        btnRegistrationRegistration,
+        tilRegistrationPassword,
+        tilRegistrationConfirmPassword,
+        tilRegistrationEmail,
+        lineRegistrationTwo,
+        tilRegistrationPhone,
+        tilRegistrationUserName"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_registration"
+        android:id="@+id/tbRegistration"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -52,23 +50,24 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivRegistrationTbBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:fontFamily="@font/roboto_regular"
             android:text="@string/cancel"
             android:textSize="17sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line_two"
+        android:id="@+id/lineRegistrationTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/tb_registration" />
+        app:layout_constraintTop_toBottomOf="@+id/tbRegistration" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_card"
+        android:id="@+id/cvRegistrationCard"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -79,9 +78,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_registration"
+            android:id="@+id/tvRegistration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/sign_up"
             android:textColor="@color/black"
             android:textSize="30sp" />
@@ -94,7 +94,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_user_name"
+        android:id="@+id/tilRegistrationUserName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,20 +106,24 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_card">
+        app:layout_constraintTop_toBottomOf="@+id/cvRegistrationCard">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_user_name"
+            android:id="@+id/etRegistrationUserName"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_user_name"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/user_name"
+            android:inputType="text"
+            android:maxLines="1"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_phone"
+        android:id="@+id/tilRegistrationPhone"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -132,20 +136,22 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_user_name">
+        app:layout_constraintTop_toBottomOf="@+id/tilRegistrationUserName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone"
+            android:id="@+id/etRegistrationPhone"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_phone"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/phone"
             android:inputType="phone"
             android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email"
+        android:id="@+id/tilRegistrationEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -158,20 +164,22 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_phone">
+        app:layout_constraintTop_toBottomOf="@+id/tilRegistrationPhone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_email"
+            android:id="@+id/etRegistrationEmail"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_mail"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_password"
+        android:id="@+id/tilRegistrationPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -184,21 +192,23 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_email"
+        app:layout_constraintTop_toBottomOf="@+id/tilRegistrationEmail"
         app:passwordToggleContentDescription="description"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
+            android:id="@+id/etRegistrationPassword"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_confirm_password"
+        android:id="@+id/tilRegistrationConfirmPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,34 +220,37 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_password"
+        app:layout_constraintTop_toBottomOf="@+id/tilRegistrationPassword"
         app:passwordToggleContentDescription="description"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_confirm_password"
+            android:id="@+id/etRegistrationConfirmPassword"
+            style="@style/customEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
             android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_registration"
+        android:id="@+id/btnRegistrationRegistration"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/round_btn_black"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/sign_up"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_confirm_password" />
+        app:layout_constraintTop_toBottomOf="@+id/tilRegistrationConfirmPassword" />
 
     <TextView
-        android:id="@+id/btn_authorization"
+        android:id="@+id/btnRegistrationAuthorization"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -247,5 +260,5 @@
         android:textColor="@color/gray_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_registration" />
+        app:layout_constraintTop_toBottomOf="@id/btnRegistrationRegistration" />
 </androidx.constraintlayout.widget.ConstraintLayout>

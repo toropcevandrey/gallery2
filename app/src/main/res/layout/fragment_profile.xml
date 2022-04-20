@@ -8,7 +8,7 @@
     android:clipToPadding="false">
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbProfileLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -19,17 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_error"
+        android:id="@+id/groupProfileError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="
-        iv_error,
-        tv_error,
-        btn_refresh"
+        ivProfileError,
+        tvProfileError,
+        btnProfileRefresh"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_error"
+        android:id="@+id/ivProfileError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_error"
+        android:id="@+id/tvProfileError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -47,34 +47,33 @@
         android:textColor="@color/main_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileError" />
 
     <Button
-        android:id="@+id/btn_refresh"
+        android:id="@+id/btnProfileRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="@drawable/round_btn_black"
-        android:fontFamily="@font/roboto"
         android:text="@string/refresh"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/tvProfileError" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_main"
+        android:id="@+id/groupProfileMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:constraint_referenced_ids="
-        tb_profile,
-        sv_main,
-        line_one"
+        tbProfile,
+        svProfileMain,
+        lineProfileOne"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_profile"
+        android:id="@+id/tbProfile"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -84,14 +83,14 @@
         tools:ignore="RtlSymmetry">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_tb_settings"
+            android:id="@+id/ivProfileTbSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@drawable/ic_settings" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivProfileTbBack"
             android:layout_width="50dp"
             android:layout_height="56dp"
             android:layout_gravity="start"
@@ -99,111 +98,109 @@
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line_one"
+        android:id="@+id/lineProfileOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/tb_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/tbProfile" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/sv_main"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tb_profile">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbProfile">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfileAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="21dp"
+            android:src="@drawable/ic_profile_avatar"
+            app:civ_border_color="@color/gray_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfileAvatar"
+            tools:text="User Name" />
+
+        <TextView
+            android:id="@+id/tvProfilePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileName"
+            tools:text="88000000000" />
+
+        <View
+            android:id="@+id/lineProfileTwo"
+            android:translationZ="90dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="1dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfilePhone" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_avatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="21dp"
-                android:src="@drawable/ic_profile_avatar"
-                app:civ_border_color="@color/gray_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/tvProfileViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/views"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/lineProfileTwo"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
-                tools:text="User Name" />
+        <TextView
+            android:id="@+id/tvProfileTextViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/_228"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProfileViews"
+            app:layout_constraintStart_toEndOf="@+id/tvProfileViews" />
 
-            <TextView
-                android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:text="88000000000" />
+        <TextView
+            android:id="@+id/tvProfileLoaded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/loaded"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProfileTextViews"
+            app:layout_constraintStart_toEndOf="@+id/tvProfileTextViews" />
 
-            <View
-                android:id="@+id/line_two"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="50dp"
-                android:background="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+        <TextView
+            android:id="@+id/tvProfileTextLoaded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/_228"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProfileLoaded"
+            app:layout_constraintStart_toEndOf="@+id/tvProfileLoaded" />
 
-            <TextView
-                android:id="@+id/tv_views"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/views"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/line_two"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_text_views"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_228"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_views"
-                app:layout_constraintStart_toEndOf="@+id/tv_views" />
-
-            <TextView
-                android:id="@+id/tv_loaded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/loaded"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_text_views"
-                app:layout_constraintStart_toEndOf="@+id/tv_text_views" />
-
-            <TextView
-                android:id="@+id/tv_text_loaded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_228"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_loaded"
-                app:layout_constraintStart_toEndOf="@+id/tv_loaded" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@id/line_two" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProfile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/lineProfileTwo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

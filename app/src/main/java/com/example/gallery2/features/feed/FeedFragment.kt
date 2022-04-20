@@ -33,18 +33,18 @@ class FeedFragment : Fragment() {
 
     private fun initViews() {
         with(binding) {
-            pager.adapter = FeedAdapter(this@FeedFragment)
-            TabLayoutMediator(tabLayout, pager) { tab, position ->
+            pagerFeed.adapter = FeedAdapter(this@FeedFragment)
+            TabLayoutMediator(tabLayoutFeed, pagerFeed) { tab, position ->
                 tab.text = TAB_NAMES[position]
             }.attach()
 
-            fabAddFile.setOnClickListener {
+            fabFeedAddFile.setOnClickListener {
                 findNavController().navigate(
                     FeedFragmentDirections.navigateFeedFragmentToBottomFragment()
                 )
             }
 
-            etSearch.addTextChangedListener(DelayTextWatcher { query ->
+            etFeedSearch.addTextChangedListener(DelayTextWatcher { query ->
                 sharedViewModel.sendSearchData(query)
             })
         }

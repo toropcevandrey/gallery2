@@ -37,18 +37,18 @@ class AuthorizationFragment : BaseFragment<FragmentAuthorizationBinding>() {
         FragmentAuthorizationBinding.inflate(layoutInflater)
 
     private fun initViews() {
-        binding.btnRegistration.setOnClickListener {
+        binding.btnAuthorizationRegistration.setOnClickListener {
             findNavController().navigate(
                 AuthorizationFragmentDirections.navigateAuthorizationToRegistration()
             )
         }
-        binding.ivTbBack.setOnClickListener {
+        binding.ivAuthorizationTbBack.setOnClickListener {
             findNavController().navigateUp()
         }
         binding.btnAuthorization.setOnClickListener {
             viewModel.checkNotNullFields(
-                binding.etEmail.text.toString(),
-                binding.etPassword.text.toString()
+                binding.etAuthorizationEmail.text.toString(),
+                binding.etAuthorizationPassword.text.toString()
             )
         }
     }
@@ -59,8 +59,8 @@ class AuthorizationFragment : BaseFragment<FragmentAuthorizationBinding>() {
             val isSuccess = state is AuthorizationState.Success
             val isLoading = state is AuthorizationState.Loading
 
-            binding.groupMain.isVisible = !isLoading && !isSuccess
-            binding.pbLoading.isVisible = isLoading
+            binding.groupAuthorizationMain.isVisible = !isLoading && !isSuccess
+            binding.pbAuthorizationLoading.isVisible = isLoading
 
             if (isSuccess) {
                 findNavController().navigate(

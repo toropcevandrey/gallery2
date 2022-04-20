@@ -7,7 +7,7 @@
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_add_photo"
+        android:id="@+id/tbAddPhoto"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingEnd="10dp"
@@ -17,16 +17,17 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:id="@+id/iv_tb_add_photo"
+            android:id="@+id/ivTbAddPhotoImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:fontFamily="@font/roboto_bold"
             android:layout_marginEnd="10dp"
             android:text="@string/add"
             android:textColor="@color/purple" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_tb_back"
+            android:id="@+id/ivTbAddPhotoBack"
             android:layout_width="50dp"
             android:layout_height="56dp"
             android:layout_gravity="start"
@@ -35,7 +36,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
-        android:id="@+id/pb_loading"
+        android:id="@+id/pbAddPhotoLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -46,38 +47,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/line_two"
+        android:id="@+id/lineAddPhotoTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_text"
-        app:layout_constraintTop_toBottomOf="@+id/tb_add_photo" />
+        app:layout_constraintTop_toBottomOf="@+id/tbAddPhoto" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_add_photo"
+        android:id="@+id/groupAddPhoto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        app:constraint_referenced_ids="iv_photo,
-        line_one,
-        til_photo_name,
-        til_description,
-        line_two,
-        tb_add_photo"
+        app:constraint_referenced_ids="ivAddPhotoImage,
+        lineAddPhotoOne,
+        tilAddPhotoName,
+        tilAddPhotoDescription,
+        lineAddPhotoTwo,
+        tbAddPhoto"
         tools:ignore="NotSibling" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_error"
+        android:id="@+id/groupAddPhotoError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
         app:constraint_referenced_ids="
-        iv_error,
-        tv_error,
-        btn_refresh"
+        ivAddPhotoError,
+        tvAddPhotoError,
+        btnAddPhotoRefresh"
         tools:ignore="NotSibling" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_error"
+        android:id="@+id/ivAddPhotoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
@@ -87,7 +88,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_error"
+        android:id="@+id/tvAddPhotoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -95,41 +96,40 @@
         android:textColor="@color/main_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/ivAddPhotoError" />
 
     <Button
-        android:id="@+id/btn_refresh"
+        android:id="@+id/btnAddPhotoRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:background="@drawable/round_btn_black"
-        android:fontFamily="@font/roboto"
         android:text="@string/refresh"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_error" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAddPhotoError" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_photo"
+        android:id="@+id/ivAddPhotoImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_add_photo"
+        app:layout_constraintTop_toBottomOf="@id/tbAddPhoto"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <View
-        android:id="@+id/line_one"
+        android:id="@+id/lineAddPhotoOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_text"
-        app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivAddPhotoImage" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_photo_name"
+        android:id="@+id/tilAddPhotoName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -141,19 +141,20 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_photo">
+        app:layout_constraintTop_toBottomOf="@+id/ivAddPhotoImage">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_photo_name"
+            android:id="@+id/etAddPhotoName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/photo_name"
             android:padding="10dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_description"
+        android:id="@+id/tilAddPhotoDescription"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,12 +166,13 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_photo_name">
+        app:layout_constraintTop_toBottomOf="@+id/tilAddPhotoName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_description"
+            android:id="@+id/etAddPhotoDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
             android:hint="@string/description"
             android:padding="10dp"
             android:textSize="17sp" />

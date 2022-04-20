@@ -37,13 +37,17 @@ class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding>() {
         FragmentAddPhotoBinding.inflate(layoutInflater)
 
     private fun initViews() {
-        binding.ivPhoto.let {
+        binding.ivAddPhotoImage.let {
             Glide.with(this)
                 .load(arguments?.getString(PHOTO_URI))
                 .into(it)
         }
 
-        binding.btnRefresh.setOnClickListener {
+        binding.ivTbAddPhotoBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.btnAddPhotoRefresh.setOnClickListener {
             postDataToVm()
         }
 
@@ -54,9 +58,9 @@ class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding>() {
 
     private fun postDataToVm() {
         viewModel.sendMediaFile(
-            name = binding.etPhotoName.text.toString(),
+            name = binding.etAddPhotoName.text.toString(),
             newFile = arguments?.getString(PHOTO_URI) ?: "",
-            description = binding.etDescription.text.toString()
+            description = binding.etAddPhotoDescription.text.toString()
         )
     }
 
@@ -66,9 +70,9 @@ class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding>() {
             val isLoading = state is AddPhotoState.Loading
             val isError = state is AddPhotoState.Error
 
-            binding.groupError.isVisible = isError
+            binding.groupAddPhotoError.isVisible = isError
             binding.groupAddPhoto.isVisible = !isError && !isLoading && !isSuccess
-            binding.pbLoading.isVisible = isLoading
+            binding.groupAddPhoto.isVisible = isLoading
 
             if (isSuccess) {
                 requireContext().toast(UPLOAD_PHOTO_SUCCESS)

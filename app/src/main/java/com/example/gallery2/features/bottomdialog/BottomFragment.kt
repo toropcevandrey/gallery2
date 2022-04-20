@@ -113,11 +113,11 @@ class BottomFragment : BottomSheetDialogFragment() {
     }
 
     private fun initViews() {
-        binding.ivCam.setOnClickListener {
+        binding.ivBottomDialogCam.setOnClickListener {
             requestCameraPermission.launch(Manifest.permission.CAMERA)
         }
 
-        binding.ivFolder.setOnClickListener {
+        binding.ivBottomDialogFolder.setOnClickListener {
             requestStoragePermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }

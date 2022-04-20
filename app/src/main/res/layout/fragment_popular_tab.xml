@@ -11,12 +11,12 @@
         android:layout_height="match_parent">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_popular"
+            android:id="@+id/swipeRefreshPopular"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_tab_popular"
+                android:id="@+id/rvTabPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -26,7 +26,7 @@
     </com.example.gallery2.helpers.NestedScrollableHost>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_error_popular"
+        android:id="@+id/ivErrorPopular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_error"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/pb_popular_center"
+        android:id="@+id/pbPopularCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress_drawable"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/pb_popular_bottom"
+        android:id="@+id/pbPopularBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
